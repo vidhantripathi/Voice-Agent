@@ -276,6 +276,188 @@
     .console-link:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
     .console-link svg { width: 12px; height: 12px; }
 
+    /* ─── Integration section ─────────────────────────── */
+    .dev-section {
+      max-width: 720px;
+      margin: 56px auto 24px;
+      padding: 0 24px;
+      scroll-margin-top: 24px;
+    }
+    .dev-section .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .dev-section h2 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .dev-section .lead {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+    .dev-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 28px 0 8px;
+      color: var(--ink);
+    }
+    .dev-section h4 {
+      font-size: 11.5px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 600;
+      margin: 20px 0 6px;
+    }
+    .dev-section p {
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .dev-section p code, .dev-section li code, .dev-section td code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      background: var(--bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--ink);
+      border: 1px solid var(--border-2);
+    }
+    .dev-section ul, .dev-section ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.7;
+    }
+    .dev-section li { margin-bottom: 3px; }
+
+    /* API key copy box */
+    .key-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0 28px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+    }
+    .key-box .row {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .key-box .lab {
+      font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--muted); font-weight: 600;
+    }
+    .key-box .key {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--ink);
+      letter-spacing: 0.2px;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+    .key-box .hint { font-size: 11.5px; color: var(--muted-2); margin-top: 8px; }
+    .copy-btn {
+      padding: 5px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 11.5px;
+      color: var(--ink-2);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .copy-btn:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
+
+    /* Code blocks */
+    .code-wrap {
+      position: relative;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 8px 0 14px;
+      overflow: hidden;
+    }
+    .code-wrap .lang {
+      position: absolute; top: 8px; right: 12px;
+      font-size: 10.5px; color: #94a3b8;
+      font-family: ui-monospace, monospace;
+      letter-spacing: 0.6px; text-transform: uppercase;
+    }
+    .dev-section pre {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .dev-section pre .c { color: #64748b; }
+    .dev-section pre .s { color: #86efac; }
+    .dev-section pre .k { color: #c4b5fd; }
+    .dev-section pre .n { color: #fde68a; }
+
+    /* Endpoint table */
+    .endpoint-tbl {
+      width: 100%; border-collapse: collapse;
+      margin-top: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+    .endpoint-tbl th, .endpoint-tbl td {
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .endpoint-tbl th {
+      font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase;
+      color: var(--muted-2); font-weight: 600;
+      background: var(--bg);
+    }
+    .endpoint-tbl td.method {
+      width: 72px; font-family: ui-monospace, monospace;
+      font-weight: 600; font-size: 11px;
+    }
+    .endpoint-tbl td.path {
+      font-family: ui-monospace, monospace;
+      font-size: 12.5px;
+      color: var(--ink);
+      width: 230px;
+    }
+    .endpoint-tbl tr:last-child td { border-bottom: none; }
+    .m-get   { color: #16a34a; }
+    .m-post  { color: var(--accent); }
+    .m-patch { color: #d97706; }
+
+    .pill-soon {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      vertical-align: middle;
+      margin-left: 8px;
+      background: var(--bg);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
     @media (max-width: 600px) {
       .console { padding: 32px 20px 28px; }
       .meta-strip { grid-template-columns: 1fr; }
@@ -294,7 +476,7 @@
       </div>
     </div>
     <div class="top-actions">
-      <a class="console-link" href="/integrate.html" target="_blank">
+      <a class="console-link" href="#integration">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         Integration
       </a>
@@ -353,6 +535,139 @@
       </div>
     </section>
   </main>
+
+  <section id="integration" class="dev-section">
+    <div class="eyebrow">For Developers</div>
+    <h2>Plug Reya into your stack</h2>
+    <p class="lead">Reya is a voice support agent for US e-commerce shoppers. Customer voice calls flow in, structured tickets flow out. Embed the call widget, hit the REST API, or both. Authentication is a single bearer token.</p>
+
+    <h4>Your API key</h4>
+    <div class="key-box">
+      <div class="row">
+        <div class="lab">Live API Key</div>
+        <button class="copy-btn" id="copy-key">Copy</button>
+      </div>
+      <div class="key" id="api-key-value">Loading…</div>
+      <div class="hint">⚠️ Treat this like a password. Never commit it to git or expose it in client-side code. Use it from a server you control.</div>
+    </div>
+
+    <h3>Quickstart</h3>
+    <ol>
+      <li>Copy your API key above.</li>
+      <li>Make a test request to <code>GET /tickets</code> with the bearer header.</li>
+      <li>Receive ticket data — or poll on a 3-second interval to surface new tickets in your own dashboard.</li>
+    </ol>
+
+    <div class="code-wrap">
+      <span class="lang">curl</span>
+      <pre><span class="c"># List tickets</span>
+curl -H <span class="s">"Authorization: Bearer YOUR_API_KEY"</span> \
+     <span class="n" data-base>$BASE_URL</span>/tickets</pre>
+    </div>
+
+    <div class="code-wrap">
+      <span class="lang">node</span>
+      <pre><span class="k">const</span> resp = <span class="k">await</span> fetch(<span class="n" data-base>"BASE_URL"</span> + <span class="s">"/tickets?priority=high"</span>, {
+  headers: { Authorization: <span class="s">`Bearer ${process.env.REYA_API_KEY}`</span> },
+});
+<span class="k">const</span> { tickets, counts } = <span class="k">await</span> resp.json();
+console.log(<span class="s">`${counts.high} high-priority tickets`</span>);</pre>
+    </div>
+
+    <h3>Authentication</h3>
+    <p>Every request must include an <code>Authorization</code> header. Two modes are accepted:</p>
+    <ul>
+      <li><b>Bearer token</b> — for programmatic / server-to-server use. Recommended for integrations.</li>
+      <li><b>HTTP Basic</b> — used by the browser-facing console UI. Don't use this from your backend.</li>
+    </ul>
+    <div class="code-wrap">
+      <span class="lang">http</span>
+      <pre>Authorization: Bearer YOUR_API_KEY</pre>
+    </div>
+
+    <h3>REST API</h3>
+    <p>All endpoints return JSON. Errors return <code>{ "error": "message" }</code> with a non-200 status.</p>
+
+    <h4>Tickets</h4>
+    <table class="endpoint-tbl">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-get">GET</td><td class="path">/tickets</td><td>List tickets. Filters: <code>?status=</code>, <code>?priority=</code>, <code>?retailer=</code>, <code>?q=</code>.</td></tr>
+        <tr><td class="method m-get">GET</td><td class="path">/tickets/:id</td><td>Get a single ticket plus its linked transcript.</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/tickets</td><td>Create a ticket from outside the voice flow.</td></tr>
+        <tr><td class="method m-patch">PATCH</td><td class="path">/tickets/:id</td><td>Update status / priority. Approve, deny, escalate, override.</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/tickets/:id/reply</td><td>Append a human-agent reply / internal note to the audit log.</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/tickets/:id/assist</td><td>Generate an AI-drafted reply using transcript + customer context.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-wrap">
+      <span class="lang">curl</span>
+      <pre><span class="c"># Approve a ticket</span>
+curl -X PATCH <span class="n" data-base>$BASE_URL</span>/tickets/RC-001 \
+  -H <span class="s">"Authorization: Bearer YOUR_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{"status":"resolved","action":"approve","note":"Refund granted"}'</span></pre>
+    </div>
+
+    <h4>Sessions</h4>
+    <table class="endpoint-tbl">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-post">POST</td><td class="path">/sessions/start</td><td>Open a session. Body: <code>{ sessionId, retailer }</code>.</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/sessions/end</td><td>Close the session. Body: <code>{ sessionId }</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Transcripts</h4>
+    <table class="endpoint-tbl">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-get">GET</td><td class="path">/transcripts/:sessionId</td><td>Full transcript for a session (every customer + Reya turn).</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/transcripts/:sessionId</td><td>Append a turn. Body: <code>{ role, text, retailer }</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Voice + retrieval</h4>
+    <table class="endpoint-tbl">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-get">GET</td><td class="path">/session</td><td>Mints an OpenAI Realtime ephemeral token + session config.</td></tr>
+        <tr><td class="method m-post">POST</td><td class="path">/retrieve</td><td>Retailer-aware FAQ retrieval. Body: <code>{ retailer, question }</code>.</td></tr>
+        <tr><td class="method m-get">GET</td><td class="path">/rubric</td><td>The scoring rubric used to derive ticket priority.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Embed the voice widget <span class="pill-soon">beta</span></h3>
+    <p>Drop the iframe on any page you own. Audio streams directly between the browser and OpenAI — your server only handles session minting and ticket creation.</p>
+    <div class="code-wrap">
+      <span class="lang">html</span>
+      <pre><span class="k">&lt;iframe</span>
+  <span class="n">src</span>=<span class="s">"<span data-base>BASE_URL</span>/?token=YOUR_API_KEY"</span>
+  <span class="n">allow</span>=<span class="s">"microphone; autoplay"</span>
+  <span class="n">style</span>=<span class="s">"border:0;width:100%;height:560px"</span>
+<span class="k">&gt;&lt;/iframe&gt;</span></pre>
+    </div>
+
+    <h3>Webhooks <span class="pill-soon">planned</span></h3>
+    <p>When ready, register a callback URL and receive POST notifications whenever a ticket is filed, escalated, or updated. For now, poll <code>GET /tickets</code> on a 3-second interval — that's how the built-in console works.</p>
+    <div class="code-wrap">
+      <span class="lang">json</span>
+      <pre><span class="c">// Future webhook payload shape</span>
+{
+  <span class="n">"event"</span>:        <span class="s">"ticket.created"</span>,
+  <span class="n">"delivered_at"</span>: <span class="s">"2026-05-12T18:30:00Z"</span>,
+  <span class="n">"ticket"</span>: {
+    <span class="n">"id"</span>:       <span class="s">"RC-042"</span>,
+    <span class="n">"retailer"</span>: <span class="s">"amazon"</span>,
+    <span class="n">"priority"</span>: <span class="s">"high"</span>,
+    <span class="n">"score"</span>:    132,
+    <span class="n">"title"</span>:    <span class="s">"Prime renewed despite explicit cancellation"</span>,
+    <span class="n">"customer"</span>: { <span class="n">"name"</span>: <span class="s">"Robert N."</span>, <span class="n">"email"</span>: <span class="s">"..."</span> }
+  }
+}</pre>
+    </div>
+  </section>
 
   <footer>
     <div>© Reya Voice Console</div>
@@ -575,6 +890,39 @@ function stop() {
 
 callBtn.addEventListener("click", () => {
   if (connected) stop(); else start();
+});
+
+// ─── Integration section: fetch API key + base URL ────────────────────
+(async () => {
+  const keyEl = document.getElementById("api-key-value");
+  if (!keyEl) return;
+  try {
+    const r = await fetch("/api/_meta");
+    if (!r.ok) throw new Error("auth");
+    const m = await r.json();
+    keyEl.textContent = m.api_key || "(not configured)";
+    document.querySelectorAll("[data-base]").forEach((el) => {
+      const original = el.textContent.replace(/^["']|["']$/g, "");
+      el.textContent = original.startsWith("$") ? '"' + m.base_url + '"' : m.base_url;
+    });
+    document.querySelectorAll(".code-wrap pre").forEach((pre) => {
+      pre.innerHTML = pre.innerHTML.replaceAll("BASE_URL", m.base_url);
+    });
+  } catch {
+    keyEl.textContent = "(authentication required — sign in to see your key)";
+  }
+})();
+
+const copyBtn = document.getElementById("copy-key");
+if (copyBtn) copyBtn.addEventListener("click", async () => {
+  const key = document.getElementById("api-key-value").textContent;
+  try {
+    await navigator.clipboard.writeText(key);
+    copyBtn.textContent = "Copied ✓";
+    setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
+  } catch {
+    copyBtn.textContent = "Copy failed";
+  }
 });
 </script>
 </body>
