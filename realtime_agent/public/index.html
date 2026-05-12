@@ -515,20 +515,6 @@
 
       <div class="meta-strip">
         <div class="meta-cell">
-          <div class="k">Knowledge bases</div>
-          <div class="v">
-            <div class="ret-row">
-              <span class="ret-tag"><span class="sw sw-amazon"></span>Amazon</span>
-              <span class="ret-tag"><span class="sw sw-target"></span>Target</span>
-              <span class="ret-tag"><span class="sw sw-walmart"></span>Walmart</span>
-            </div>
-          </div>
-        </div>
-        <div class="meta-cell">
-          <div class="k">Model</div>
-          <div class="v" id="model-cell">gpt-4o-realtime</div>
-        </div>
-        <div class="meta-cell">
           <div class="k">Session</div>
           <div class="v" id="session-cell">—</div>
         </div>
@@ -745,7 +731,6 @@ const callMeta  = document.getElementById("call-meta");
 const callSub   = document.getElementById("call-sub");
 const statusPill = document.getElementById("status-pill");
 const statusText = document.getElementById("status-text");
-const modelCell  = document.getElementById("model-cell");
 const sessionCell = document.getElementById("session-cell");
 const audioEl    = document.getElementById("audio");
 
@@ -801,7 +786,6 @@ async function start() {
     if (!session.client_secret) throw new Error("No client_secret");
     const ephemeralKey = session.client_secret.value;
     const model = session.model;
-    modelCell.textContent = model;
     currentSessionId = session.id;
     sessionCell.textContent = (session.id || "").replace("sess_", "");
 
