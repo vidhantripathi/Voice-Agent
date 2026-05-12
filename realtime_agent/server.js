@@ -435,7 +435,7 @@ app.use((req, res, next) => {
     const [u, p] = Buffer.from(payload, "base64").toString().split(":");
     if (u === AUTH_USER && p === AUTH_PASS) return next();
   }
-  res.set("WWW-Authenticate", 'Basic realm="RADS Voice Agent", charset="UTF-8"');
+  res.set("WWW-Authenticate", 'Basic realm="Agent Console", charset="UTF-8"');
   res.status(401).send("Authentication required");
 });
 
