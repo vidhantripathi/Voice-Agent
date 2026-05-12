@@ -423,6 +423,22 @@ const FAQ_TOOL = {
 
 const app = express();
 app.use(express.json());
+
+// Basic Auth middleware — protects every route when BASIC_AUTH_PASS is set
+const AUTH_USER = process.env.BASIC_AUTH_USER || "admin";
+const AUTH_PASS = process.env.BASIC_AUTH_PASS || "";
+app.use((req, res, next) => {
+  if (!AUTH_PASS) return next();
+  const hdr = req.headers.authorization || "";
+  const [scheme, payload] = hdr.split(" ");
+  if (scheme === "Basic" && payload) {
+    const [u, p] = Buffer.from(payload, "base64").toString().split(":");
+    if (u === AUTH_USER && p === AUTH_PASS) return next();
+  }
+  res.set("WWW-Authenticate", 'Basic realm="RADS Voice Agent", charset="UTF-8"');
+  res.status(401).send("Authentication required");
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/session", async (_req, res) => {
