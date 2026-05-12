@@ -7,22 +7,24 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #f7f8fa;
-      --surface:   #ffffff;
-      --border:    #e5e7eb;
-      --border-2:  #eef0f4;
-      --ink:       #0f172a;
-      --ink-2:     #334155;
-      --muted:     #64748b;
-      --muted-2:   #94a3b8;
-      --accent:    #4f46e5;
-      --accent-2:  #eef2ff;
-      --ok:        #16a34a;
-      --ok-bg:     #ecfdf5;
-      --warn:      #d97706;
-      --warn-bg:   #fffbeb;
-      --danger:    #dc2626;
-      --danger-bg: #fef2f2;
+      color-scheme: dark;
+      --bg:        #0a0e18;
+      --surface:   #131826;
+      --surface-2: #1b2233;
+      --border:    #2a3346;
+      --border-2:  #1e2538;
+      --ink:       #e8ecf5;
+      --ink-2:     #b8c0d4;
+      --muted:     #7c8aa8;
+      --muted-2:   #5a6680;
+      --accent:    #818cf8;
+      --accent-2:  rgba(129,140,248,0.14);
+      --ok:        #4ade80;
+      --ok-bg:     rgba(74,222,128,0.14);
+      --warn:      #fbbf24;
+      --warn-bg:   rgba(251,191,36,0.14);
+      --danger:    #f87171;
+      --danger-bg: rgba(248,113,113,0.14);
     }
     html, body {
       height: 100vh; overflow: hidden;
@@ -132,7 +134,9 @@
       outline: none;
       color: var(--ink);
     }
-    .search input:focus { border-color: var(--accent); background-color: var(--surface); }
+    .search input { color: var(--ink); }
+    .search input::placeholder { color: var(--muted-2); }
+    .search input:focus { border-color: var(--accent); }
 
     .filters {
       display: flex; gap: 6px;
@@ -281,8 +285,8 @@
       max-width: 92%;
       white-space: pre-wrap;
     }
-    .msg.user  { background: #f1f5f9; color: var(--ink); }
-    .msg.agent { background: var(--accent-2); color: var(--ink); margin-left: auto; }
+    .msg.user  { background: var(--surface-2); color: var(--ink); border: 1px solid var(--border-2); }
+    .msg.agent { background: var(--accent-2); color: var(--ink); margin-left: auto; border: 1px solid rgba(129,140,248,0.22); }
     .msg .role {
       font-size: 10.5px; color: var(--muted);
       font-weight: 600; letter-spacing: 0.6px;
@@ -293,7 +297,7 @@
     .reply-area {
       padding: 12px 24px;
       border-top: 1px solid var(--border-2);
-      background: #fbfcfd;
+      background: rgba(255,255,255,0.015);
     }
     .reply-tools {
       display: flex; gap: 8px; margin-bottom: 8px;
@@ -320,7 +324,10 @@
       font-size: 13px;
       resize: vertical;
       outline: none;
+      background: var(--bg);
+      color: var(--ink);
     }
+    .reply-area textarea::placeholder { color: var(--muted-2); }
     .reply-area textarea:focus { border-color: var(--accent); }
 
     .agent-actions {
@@ -342,11 +349,11 @@
       border: 1px solid transparent;
     }
     .btn svg { width: 14px; height: 14px; }
-    .btn.approve  { background: var(--ok);     color: #fff; }
-    .btn.deny     { background: var(--surface); color: var(--danger); border-color: #fecaca; }
-    .btn.escalate { background: var(--surface); color: var(--ink-2);  border-color: var(--border); }
-    .btn.override { background: var(--surface); color: var(--ink-2);  border-color: var(--border); }
-    .btn:hover { filter: brightness(1.04); }
+    .btn.approve  { background: var(--ok);          color: #062815; }
+    .btn.deny     { background: var(--danger-bg);   color: var(--danger); border-color: rgba(248,113,113,0.35); }
+    .btn.escalate { background: var(--surface-2);   color: var(--ink-2);  border-color: var(--border); }
+    .btn.override { background: var(--surface-2);   color: var(--ink-2);  border-color: var(--border); }
+    .btn:hover { filter: brightness(1.15); }
     .review-flag {
       margin-left: auto;
       font-size: 11.5px;
@@ -400,9 +407,9 @@
     .pol-card {
       margin: 8px 18px;
       padding: 10px 12px;
-      border: 1px solid var(--border-2);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      background: var(--surface);
+      background: var(--surface-2);
     }
     .pol-card .tt {
       font-size: 12.5px; font-weight: 600; color: var(--ink);
@@ -415,13 +422,15 @@
     .toast {
       position: fixed; bottom: 24px; right: 24px;
       padding: 10px 16px;
-      background: var(--ink); color: #fff;
+      background: var(--surface-2); color: var(--ink);
+      border: 1px solid var(--border);
       border-radius: 8px;
       font-size: 12.5px;
       opacity: 0; transform: translateY(8px);
       transition: opacity 0.2s, transform 0.2s;
       pointer-events: none;
       z-index: 10;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
@@ -506,10 +515,10 @@
     /* Templates popover */
     .tmpl-popover {
       position: absolute;
-      background: var(--surface);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55);
       padding: 6px;
       z-index: 20;
       min-width: 260px;
