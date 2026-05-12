@@ -424,19 +424,62 @@ const FAQ_TOOL = {
 const app = express();
 app.use(express.json());
 
-// Basic Auth middleware — protects every route when BASIC_AUTH_PASS is set
+// Auth middleware — accepts EITHER Basic (browser) OR Bearer (programmatic)
 const AUTH_USER = process.env.BASIC_AUTH_USER || "admin";
 const AUTH_PASS = process.env.BASIC_AUTH_PASS || "";
+const API_KEY   = process.env.API_KEY || "";
 app.use((req, res, next) => {
-  if (!AUTH_PASS) return next();
+  if (!AUTH_PASS && !API_KEY) return next(); // no auth configured (dev mode)
   const hdr = req.headers.authorization || "";
-  const [scheme, payload] = hdr.split(" ");
-  if (scheme === "Basic" && payload) {
-    const [u, p] = Buffer.from(payload, "base64").toString().split(":");
+
+  // Bearer (programmatic integrations)
+  if (API_KEY && hdr.startsWith("Bearer ")) {
+    const token = hdr.slice(7).trim();
+    if (token === API_KEY) return next();
+  }
+  // Basic (browser console)
+  if (AUTH_PASS && hdr.startsWith("Basic ")) {
+    const [u, p] = Buffer.from(hdr.slice(6), "base64").toString().split(":");
     if (u === AUTH_USER && p === AUTH_PASS) return next();
   }
+
   res.set("WWW-Authenticate", 'Basic realm="Agent Console", charset="UTF-8"');
-  res.status(401).send("Authentication required");
+  res.status(401).json({ error: "Authentication required. Send Authorization: Bearer YOUR_API_KEY or use Basic auth." });
+});
+
+// Integration metadata (auth-protected so only authorized users see the API key)
+app.get("/api/_meta", (req, res) => {
+  const baseUrl = process.env.PUBLIC_BASE_URL || `${req.protocol}://${req.get("host")}`;
+  res.json({
+    name: "Reya Voice Agent",
+    version: "1.0",
+    base_url: baseUrl,
+    api_key: API_KEY,
+    retailers: Object.keys(RETAILER_STORES).filter((k) => RETAILER_STORES[k]),
+    endpoints: {
+      tickets: {
+        list:    "GET /tickets?status=&priority=&retailer=&q=",
+        get:     "GET /tickets/:id",
+        create:  "POST /tickets",
+        update:  "PATCH /tickets/:id",
+        reply:   "POST /tickets/:id/reply",
+        assist:  "POST /tickets/:id/assist",
+      },
+      sessions: {
+        start: "POST /sessions/start",
+        end:   "POST /sessions/end",
+      },
+      transcripts: {
+        append: "POST /transcripts/:sessionId",
+        get:    "GET /transcripts/:sessionId",
+      },
+      voice: {
+        mint_session: "GET /session",
+        retrieve:     "POST /retrieve",
+      },
+      rubric: "GET /rubric",
+    },
+  });
 });
 
 app.use(express.static(path.join(__dirname, "public")));
