@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: reya-voice-agent
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: realtime_agent
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      # Non-sensitive runtime config
+      - key: REALTIME_MODEL
+        value: gpt-4o-realtime-preview-2024-12-17
+      - key: REALTIME_VOICE
+        value: alloy
+      - key: RETRIEVAL_MODEL
+        value: gpt-4o-mini
+      - key: TURN_THRESHOLD
+        value: "0.5"
+      - key: TURN_PREFIX_PADDING_MS
+        value: "200"
+      - key: TURN_SILENCE_MS
+        value: "400"
+      - key: TEMPERATURE
+        value: "0.7"
+      - key: MAX_RESPONSE_TOKENS
+        value: "200"
+      - key: DATA_RETENTION_DAYS
+        value: "90"
+
+      # Public demo: auth disabled
+      - key: BASIC_AUTH_USER
+        value: admin
+      - key: BASIC_AUTH_PASS
+        value: ""
+      - key: API_KEY
+        value: ""
+
+      # Secrets — Render UI prompts you to enter these once after first deploy.
+      # `sync: false` means the value is not stored in this file.
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: TARGET_VECTOR_STORE_ID
+        sync: false
+      - key: AMAZON_VECTOR_STORE_ID
+        sync: false
+      - key: WALMART_VECTOR_STORE_ID
+        sync: false
+      - key: VECTOR_STORE_ID
+        sync: false

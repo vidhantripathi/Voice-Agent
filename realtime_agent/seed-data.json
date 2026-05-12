@@ -1,0 +1,106 @@
+{
+  "_comment": "Demo seed data loaded on first boot when the ticket store is empty. Safe to delete after real tickets accumulate.",
+  "tickets": [
+    {
+      "sessionId": "sess_demo_001",
+      "retailer": "target",
+      "issue_type": "no_show_refund",
+      "title": "No-Show Refund Request — Michelin Star Tasting Menu",
+      "description": "Customer requesting refund for $420 reservation marked as no-show. Claims they were stuck in traffic and notified the restaurant by phone 30 minutes before. 5 previous no-shows on account.",
+      "priority": "high",
+      "customer_name": "Marcus Chen",
+      "customer_email": "marcus.chen@email.com",
+      "transcript": [
+        { "role": "user",  "text": "Hi, I'm trying to get a refund on a booking I made — it got marked as a no-show but I called ahead." },
+        { "role": "agent", "text": "I'm sorry to hear that. Can I have your booking reference and your name for the ticket?" },
+        { "role": "user",  "text": "BK-887234, and my name is Marcus Chen. It was $420 for the tasting menu at Le Bernadin." },
+        { "role": "agent", "text": "Got it. Did you notify the restaurant directly when you knew you'd be late?" },
+        { "role": "user",  "text": "Yes, I called them 30 minutes before. They said they'd note it but it still got marked no-show." },
+        { "role": "agent", "text": "Thanks Marcus. I'm filing a high-priority refund review ticket so our senior team can look at this with the full booking history." }
+      ]
+    },
+    {
+      "sessionId": "sess_demo_002",
+      "retailer": "amazon",
+      "issue_type": "missing_order",
+      "title": "Package marked delivered but never arrived — order #112-8847",
+      "description": "Customer reports package showing 'delivered' on Amazon tracking but never received. Checked with neighbors and building manager. First missing-package incident in 8 months of Prime membership.",
+      "priority": "medium",
+      "customer_name": "Priya Sharma",
+      "customer_email": "priya.s@email.com",
+      "transcript": [
+        { "role": "user",  "text": "Hi, my Amazon order is showing delivered but I never got it." },
+        { "role": "agent", "text": "That's frustrating, sorry to hear that. Has it been more than 48 hours past the delivery time?" },
+        { "role": "user",  "text": "Yes, two days now. I checked with my neighbors and the building manager." },
+        { "role": "agent", "text": "Got it. Can I have your order number and your name?" },
+        { "role": "user",  "text": "Priya Sharma. The order is 112-8847431-1922." },
+        { "role": "agent", "text": "Filing a ticket for you. Amazon's A-to-z Guarantee should cover this." }
+      ]
+    },
+    {
+      "sessionId": "sess_demo_003",
+      "retailer": "walmart",
+      "issue_type": "damaged_item",
+      "title": "TV arrived with cracked screen — won't accept return online",
+      "description": "65-inch TV from Walmart arrived with shipping damage. Customer attempted online return; system rejected it citing 'damage not covered'. TV is within 30-day electronics window.",
+      "priority": "high",
+      "customer_name": "Tyler Brooks",
+      "customer_email": "tyler.brooks@email.com",
+      "transcript": [
+        { "role": "user",  "text": "I bought a 65-inch TV from Walmart and it arrived with a cracked screen. The return won't go through." },
+        { "role": "agent", "text": "I'm sorry — that's exactly what the policy should cover. How long ago did it arrive?" },
+        { "role": "user",  "text": "Three days ago. Walmart's website says shipping damage isn't covered which doesn't seem right." },
+        { "role": "agent", "text": "It should be covered under the 30-day electronics window. Let me file this as a high-priority ticket so a senior agent can override the system." },
+        { "role": "user",  "text": "Thank you, that would be great. Tyler Brooks." }
+      ]
+    },
+    {
+      "sessionId": "sess_demo_004",
+      "retailer": "target",
+      "issue_type": "price_dispute",
+      "title": "Price match denied for item shown live on Walmart app",
+      "description": "Customer showed live Walmart app pricing $40 below Target purchase from yesterday. Cashier denied citing 'manager discretion'. Within 14-day window.",
+      "priority": "medium",
+      "customer_name": "Aisha Johnson",
+      "customer_email": "aisha.j@email.com",
+      "transcript": [
+        { "role": "user",  "text": "Hi, I went to Target yesterday to price match an item I'd bought, and the manager refused even though I showed it live on my phone." },
+        { "role": "agent", "text": "That doesn't sound right — Target does honor 14-day price match with live competitor proof. What was the item?" },
+        { "role": "user",  "text": "A Dyson V8 vacuum. Walmart had it $40 cheaper, live on their app, same model." },
+        { "role": "agent", "text": "I'll file a ticket. Your name?" },
+        { "role": "user",  "text": "Aisha Johnson. Thanks." }
+      ]
+    },
+    {
+      "sessionId": "sess_demo_005",
+      "retailer": "amazon",
+      "issue_type": "subscription_billing",
+      "title": "Prime renewed despite explicit cancellation",
+      "description": "Customer cancelled Prime in writing 3 weeks before renewal, has confirmation email. Was still charged $139. Disputing on card may freeze account.",
+      "priority": "high",
+      "customer_name": "Robert Nguyen",
+      "customer_email": "robert.nguyen@email.com",
+      "transcript": [
+        { "role": "user",  "text": "I cancelled my Prime membership three weeks ago and I still got charged today. I have the confirmation email." },
+        { "role": "agent", "text": "That should not have happened. I'm going to escalate this so a senior agent can look at your account directly." },
+        { "role": "user",  "text": "Robert Nguyen. Please make sure they see the cancellation email." },
+        { "role": "agent", "text": "Filing a high-priority escalation. A senior agent will follow up shortly." }
+      ]
+    },
+    {
+      "sessionId": "sess_demo_006",
+      "retailer": "walmart",
+      "issue_type": "registry_question",
+      "title": "Question about extending baby registry return window",
+      "description": "First-time mother asking about extending 1-year window since baby arrived 11 months late. Sympathetic case, no policy abuse.",
+      "priority": "low",
+      "customer_name": "Elena Vasquez",
+      "customer_email": "elena.v@email.com",
+      "transcript": [
+        { "role": "user",  "text": "Hi, I have a baby registry from Walmart and some items are expiring in the return window — can the year be extended?" },
+        { "role": "agent", "text": "Congratulations! The standard registry return window is 1 year from the event date. Let me file a ticket so our team can look at extending it for your case." },
+        { "role": "user",  "text": "Thank you so much. Elena Vasquez." }
+      ]
+    }
+  ]
+}

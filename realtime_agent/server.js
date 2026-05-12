@@ -48,6 +48,53 @@ let store = { counter: 0, tickets: [], transcripts: {} };
 if (fs.existsSync(STORE_PATH)) {
   try { store = JSON.parse(fs.readFileSync(STORE_PATH, "utf-8")); } catch {}
 }
+
+// Seed demo tickets on first boot when the store is empty (Render free tier
+// wipes data on each restart, so this keeps the demo populated)
+const SEED_FILE = path.join(__dirname, "seed-data.json");
+function seedDemoTickets() {
+  if (store.tickets.length > 0) return;
+  if (!fs.existsSync(SEED_FILE)) return;
+  try {
+    const seed = JSON.parse(fs.readFileSync(SEED_FILE, "utf-8"));
+    console.log(`[seed] empty store detected — loading ${seed.tickets.length} demo tickets…`);
+    for (const t of seed.tickets) {
+      const c360 = synthCustomer360(t.sessionId, t.customer_name, t.customer_email);
+      const scored = scoreTicket({
+        declaredPriority: t.priority,
+        issueType: t.issue_type,
+        customer: c360,
+      });
+      const ticket = {
+        id: nextTicketId(),
+        sessionId: t.sessionId,
+        retailer: t.retailer,
+        issue_type: t.issue_type,
+        title: t.title,
+        description: t.description,
+        priority: scored.priority,
+        score: scored.score,
+        scoreBreakdown: scored.breakdown,
+        status: "pending",
+        kind: "ticket",
+        customer: c360,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        actions: [{ type: "seeded", at: new Date().toISOString(), by: "system" }],
+      };
+      store.tickets.unshift(ticket);
+      store.transcripts[t.sessionId] = {
+        sessionId: t.sessionId,
+        retailer: t.retailer,
+        startedAt: new Date().toISOString(),
+        turns: t.transcript.map((tu) => ({ role: tu.role, text: tu.text, timestamp: new Date().toISOString() })),
+      };
+    }
+    saveStore();
+  } catch (e) {
+    console.error("[seed] failed:", e.message);
+  }
+}
 function saveStore() {
   fs.writeFileSync(STORE_PATH, JSON.stringify(store, null, 2));
 }
@@ -922,6 +969,8 @@ app.get("/transcripts/:sessionId", (req, res) => {
   if (!t) return res.status(404).json({ error: "not found" });
   res.json(t);
 });
+
+seedDemoTickets();
 
 app.listen(PORT, () => {
   console.log(`\n  Reya voice agent  → http://localhost:${PORT}/`);
