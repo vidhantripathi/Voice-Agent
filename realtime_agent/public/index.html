@@ -541,14 +541,14 @@
     <h2>Plug Reya into your stack</h2>
     <p class="lead">Reya is a voice support agent for US e-commerce shoppers. Customer voice calls flow in, structured tickets flow out. Embed the call widget, hit the REST API, or both. Authentication is a single bearer token.</p>
 
-    <h4>Your API key</h4>
-    <div class="key-box">
+    <h4>Authentication</h4>
+    <div class="key-box" id="auth-box">
       <div class="row">
-        <div class="lab">Live API Key</div>
-        <button class="copy-btn" id="copy-key">Copy</button>
+        <div class="lab" id="auth-lab">Status</div>
+        <button class="copy-btn" id="copy-key" style="display:none">Copy</button>
       </div>
       <div class="key" id="api-key-value">Loading…</div>
-      <div class="hint">⚠️ Treat this like a password. Never commit it to git or expose it in client-side code. Use it from a server you control.</div>
+      <div class="hint" id="auth-hint"></div>
     </div>
 
     <h3>Quickstart</h3>
@@ -894,13 +894,28 @@ callBtn.addEventListener("click", () => {
 
 // ─── Integration section: fetch API key + base URL ────────────────────
 (async () => {
-  const keyEl = document.getElementById("api-key-value");
+  const keyEl  = document.getElementById("api-key-value");
+  const labEl  = document.getElementById("auth-lab");
+  const hintEl = document.getElementById("auth-hint");
+  const copyBtn = document.getElementById("copy-key");
   if (!keyEl) return;
   try {
     const r = await fetch("/api/_meta");
     if (!r.ok) throw new Error("auth");
     const m = await r.json();
-    keyEl.textContent = m.api_key || "(not configured)";
+
+    if (m.api_key) {
+      if (labEl) labEl.textContent = "Live API Key";
+      if (copyBtn) copyBtn.style.display = "";
+      keyEl.textContent = m.api_key;
+      if (hintEl) hintEl.textContent = "⚠️ Treat this like a password. Never commit it to git or expose it in client-side code.";
+    } else {
+      if (labEl) labEl.textContent = "Auth Mode";
+      if (copyBtn) copyBtn.style.display = "none";
+      keyEl.textContent = "Public — no auth required";
+      if (hintEl) hintEl.textContent = "This deployment runs in public demo mode. Endpoints accept requests without an Authorization header. For production, set BASIC_AUTH_PASS or API_KEY in your environment.";
+    }
+
     document.querySelectorAll("[data-base]").forEach((el) => {
       const original = el.textContent.replace(/^["']|["']$/g, "");
       el.textContent = original.startsWith("$") ? '"' + m.base_url + '"' : m.base_url;
@@ -909,19 +924,19 @@ callBtn.addEventListener("click", () => {
       pre.innerHTML = pre.innerHTML.replaceAll("BASE_URL", m.base_url);
     });
   } catch {
-    keyEl.textContent = "(authentication required — sign in to see your key)";
+    keyEl.textContent = "(failed to load metadata)";
   }
 })();
 
-const copyBtn = document.getElementById("copy-key");
-if (copyBtn) copyBtn.addEventListener("click", async () => {
+const copyBtnRef = document.getElementById("copy-key");
+if (copyBtnRef) copyBtnRef.addEventListener("click", async () => {
   const key = document.getElementById("api-key-value").textContent;
   try {
     await navigator.clipboard.writeText(key);
-    copyBtn.textContent = "Copied ✓";
-    setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
+    copyBtnRef.textContent = "Copied ✓";
+    setTimeout(() => (copyBtnRef.textContent = "Copy"), 1500);
   } catch {
-    copyBtn.textContent = "Copy failed";
+    copyBtnRef.textContent = "Copy failed";
   }
 });
 </script>
