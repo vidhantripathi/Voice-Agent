@@ -1,0 +1,344 @@
+{
+  "metadata": {
+    "source": "https://www.target.com/help",
+    "scraped_date": "2026-05-12",
+    "total_categories": 8,
+    "total_faqs": 54,
+    "intended_use": "RAG / OpenAI vector store for voice agent"
+  },
+  "faqs": [
+
+    {
+      "id": "pm-001",
+      "category": "Price Match",
+      "question": "What is Target's price match guarantee?",
+      "answer": "Target will match the price if you buy a qualifying item at Target and then find the identical item for less at Target.com, in Target stores, or with a Target Circle deal that applies automatically at checkout. Price matches may be requested at time of purchase or within 14 days after purchase. To request in store, provide proof of the current lower price at Guest Services. For Target.com or Target app purchases, chat online or call 1-800-591-3869.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-002",
+      "category": "Price Match",
+      "question": "How do I request a price match in a Target store?",
+      "answer": "You can request a price match at checkout or at Guest Services. Bring proof of the Target price you want to match — the digital ad, Target.com, or the Target App shown on your mobile device. Screenshots or pictures cannot be accepted. Bring the original receipt if you already purchased the item.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-003",
+      "category": "Price Match",
+      "question": "How do I request a price match for a Target.com order?",
+      "answer": "Chat with Target online at target.com/help/contact-us. Have the current price you want to match ready — shown from the digital ad, Target.com, or the Target App on your mobile device. Screenshots or pictures cannot be accepted. Also have your order number and item information ready.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-004",
+      "category": "Price Match",
+      "question": "What items are NOT eligible for price match?",
+      "answer": "Price match is not available for: items bought in one Target store where the lower price is from a different Target store; items purchased with a Registry completion coupon or Target coupons; items where a promotional Target GiftCard was part of the original purchase or is currently offered; clearance, closeout, liquidation, refurbished items; pricing due to typographical errors; contract mobile phones and plans; optical, pharmacy, and clinic purchases; pre-order items; and items containing alcohol (subject to state regulations).",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-005",
+      "category": "Price Match",
+      "question": "Does Target price match grocery items?",
+      "answer": "Yes, but produce items must be the identical item, brand name (e.g., Dole, Good & Gather), size, weight, and quantity to qualify. Items need to be sold in the same unit of measure (per pound vs. per item). Non-SuperTargets cannot match per-pound items.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-006",
+      "category": "Price Match",
+      "question": "Do prices vary between Target.com and Target stores?",
+      "answer": "Yes, pricing, promotions, styles, and availability may vary by store and online. However, Target does match Target.com prices on in-store purchases and in-store prices for Target.com purchases. In-store price matches from other Target stores are excluded. Online clearance prices are separate from in-store clearance pricing.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-007",
+      "category": "Price Match",
+      "question": "Does an item need to be in stock to receive a price match?",
+      "answer": "No, items do not need to be in stock to qualify for a price match. However, rain checks are not given for price match requests if items are out of stock.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-008",
+      "category": "Price Match",
+      "question": "Can I use my Target Circle Card 5% discount on a price-matched item?",
+      "answer": "Yes. When you use your Target Circle Card, you will save 5% even on price-matched items. Some restrictions apply. Visit Target.com/CircleCard for program rules.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-009",
+      "category": "Price Match",
+      "question": "Can I use a coupon when price matching?",
+      "answer": "Manufacturer coupons will be applied after the price match is made (for in-store purchases only). Target coupons cannot be combined with price match.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-010",
+      "category": "Price Match",
+      "question": "Does Target price match items on comparison-shopping sites?",
+      "answer": "No. An item's price must be validated by a team member on Target.com or Target's digital ad. Online search engines may show a different price from Target.com due to web caching, and comparison shopping sites can have outdated pricing.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+    {
+      "id": "pm-011",
+      "category": "Price Match",
+      "question": "Does Target offer rain checks?",
+      "answer": "Yes, a rain check may be available if a sale item is not available at your Target store. The rain check entitles you to today's sale price for the next 30-45 days (varies by state) and can be used at any Target store. Exclusions: clearance, Price Cut, Temporary Price Cut and Everyday Low Price items, contract cell phones, and music/movie/software titles. Rain checks are not offered on Target.com. Only paper rain checks are issued and accepted.",
+      "source_url": "https://www.target.com/help/articles/policies-guidelines/price-match-guarantee"
+    },
+
+    {
+      "id": "ret-001",
+      "category": "Returns & Exchanges",
+      "question": "What is Target's return policy?",
+      "answer": "Most unopened items sold by Target in new condition and returned within 90 days will receive a refund or exchange. The return window begins once you receive your item (when delivered, delivered by Shipt, or picked up in store). Items that are opened, damaged, or without a receipt may be denied a refund or exchange. Target reserves the right to deny returns, refunds, and exchanges including in cases of fraud or abuse.",
+      "source_url": "https://www.target.com/help/articles/returns-exchanges/returns"
+    },
+    {
+      "id": "ret-002",
+      "category": "Returns & Exchanges",
+      "question": "What is the return policy for Target Plus Partner items?",
+      "answer": "Most unopened items sold by Target Plus in new condition and returned within 30 days will receive a refund. Target Plus items must be returned with a receipt or proof of purchase.",
+      "source_url": "https://www.target.com/help/articles/returns-exchanges/returns"
+    },
+    {
+      "id": "ret-003",
+      "category": "Returns & Exchanges",
+      "question": "How do I start a return for a Target.com order?",
+      "answer": "On Target.com or in the Target app, you can begin to process your return or replacement, or find the return barcode for in-store returns. The return barcode is available once the order has shipped, been delivered by a Shipt shopper, or picked up. You can also bring the payment credit or debit card used to purchase the item and the store can attempt a receipt lookup.",
+      "source_url": "https://www.target.com/help/articles/returns-exchanges/returns"
+    },
+    {
+      "id": "ret-004",
+      "category": "Returns & Exchanges",
+      "question": "What is the return policy for baby and wedding registry items?",
+      "answer": "Baby and Wedding registries have up to one year after your event date to return most new, unopened items, including most new, unopened items sold by a Target Plus Partner. You can access the return barcode on your Target.com Registry or Wish List homepage. A minimum spend is required against the registry or wish list to qualify for returns. Refunds will be issued as a Target GiftCard when using a gift receipt for Registry Gift Purchase Log.",
+      "source_url": "https://www.target.com/help/articles/returns-exchanges/returns"
+    },
+    {
+      "id": "ret-005",
+      "category": "Returns & Exchanges",
+      "question": "Can I return large or heavy items to a Target store?",
+      "answer": "Most items, including large items, can be returned to a Target store for a refund with no restocking fees. Some large items such as furniture and electronics may be eligible for return pickup. To check if your item is eligible for pickup by Target's return carrier, call Target.com Guest Services at 1-800-591-3869 with your order information.",
+      "source_url": "https://www.target.com/help/articles/returns-exchanges/returns"
+    },
+
+    {
+      "id": "tc-001",
+      "category": "Target Circle",
+      "question": "What are Target Circle deals?",
+      "answer": "Target Circle deals (formerly called Target Circle offers) are savings that most automatically apply at checkout in-store and online for Target Circle members. You no longer need to manually add most offers. Other saving options like Target Circle Bonuses, coupons, and rebates can be found on the Target Circle Deals page and must be activated.",
+      "source_url": "https://www.target.com/help/articles/target-circle/target-circle-offers"
+    },
+    {
+      "id": "tc-002",
+      "category": "Target Circle",
+      "question": "Where can I find Target Circle deals?",
+      "answer": "Most Target Circle deals automatically apply at checkout on Target.com or in the Target app. Target Circle Bonuses, coupons, and rebates can be found on the Target Circle Deals page. You can manage saved deals by signing in to your account and selecting Target Circle from the top menu bar, then the Deals tab.",
+      "source_url": "https://www.target.com/help/articles/target-circle/target-circle-offers"
+    },
+    {
+      "id": "tc-003",
+      "category": "Target Circle",
+      "question": "Can Target Circle deals be used for price matching?",
+      "answer": "Yes, qualifying Target Circle deals (those that apply automatically at checkout when you identify yourself as a Target Circle member) are eligible for price matching. However, Target Circle Bonuses (just-for-you bonuses that must be tapped to add) cannot be applied with price match.",
+      "source_url": "https://www.target.com/help/articles/target-circle/target-circle-offers"
+    },
+    {
+      "id": "tc-004",
+      "category": "Target Circle",
+      "question": "Why can't I access Target Circle deals in the Target app?",
+      "answer": "If you are unable to save or access Target Circle deals, make sure you are using the latest version of the Target app. Update it from the Apple App Store or Google Play Store. If using the current app, verify you are signed in with the correct email and password, try signing in and out, and restart the phone by powering it off and on.",
+      "source_url": "https://www.target.com/help/articles/target-circle/target-circle-offers"
+    },
+
+    {
+      "id": "coup-001",
+      "category": "Coupons & Deals",
+      "question": "How many coupons can I use per item?",
+      "answer": "Only one manufacturer coupon (paper or digital), one Target category offer, and one Target item-level offer can be combined per item. Limit of 4 identical coupons per household, per day unless otherwise noted on the coupon. Target does not accept expired coupons.",
+      "source_url": "https://www.target.com/help/articles/promotions-coupons/coupon-deals"
+    },
+    {
+      "id": "coup-002",
+      "category": "Coupons & Deals",
+      "question": "Can I use two BOGO (buy one get one) coupons together?",
+      "answer": "No, BOGO coupons cannot be combined. You cannot use two BOGO coupons on two items and get both for free. Unless stated otherwise, one BOGO coupon requires two valid items at checkout — one item is charged and the second is discounted by its full retail price.",
+      "source_url": "https://www.target.com/help/articles/promotions-coupons/coupon-deals"
+    },
+    {
+      "id": "coup-003",
+      "category": "Coupons & Deals",
+      "question": "How do digital manufacturer rebates work at Target?",
+      "answer": "To earn a digital manufacturer rebate, add the offer to your list or scan an item in store using the Target app to determine if it qualifies. To redeem, scan your Wallet barcode or enter your phone number at checkout — you will automatically receive an email rebate within one hour of purchase. The rebate will be emailed from Target@BYBEapp.com and can be accessed through PayPal, Venmo, or digital Visa. Digital manufacturer rebates are single-use and will disappear from your list once redeemed.",
+      "source_url": "https://www.target.com/help/articles/promotions-coupons/coupon-deals"
+    },
+    {
+      "id": "coup-004",
+      "category": "Coupons & Deals",
+      "question": "Do coupons affect my return credit?",
+      "answer": "When you return any item, your return credit will not include any promotional discount or coupon that applied to the original order. Target reserves the right to decline returns of items purchased with manufacturer coupons or rebates.",
+      "source_url": "https://www.target.com/help/articles/promotions-coupons/coupon-deals"
+    },
+
+    {
+      "id": "pay-001",
+      "category": "Payment Options",
+      "question": "Can I use more than one credit card per Target.com order?",
+      "answer": "Yes. Up to two credit or debit card tenders are accepted in one transaction (split payment).",
+      "source_url": "https://www.target.com/help/articles/payment-options/credit-debit-cards"
+    },
+    {
+      "id": "pay-002",
+      "category": "Payment Options",
+      "question": "When will I be charged for my Target order?",
+      "answer": "A pending authorization appears on your online statement when the order is placed. Items are charged or posted when they are picked and placed on hold for Drive Up or Order Pickup, picked by your Shipt shopper for Same Day Delivery, or when they are shipped. The order total may be split across multiple charges as items are picked or shipped.",
+      "source_url": "https://www.target.com/help/articles/payment-options/credit-debit-cards"
+    },
+    {
+      "id": "pay-003",
+      "category": "Payment Options",
+      "question": "Does the billing name need to match the name on my credit card?",
+      "answer": "Yes, your billing name must match the actual name on your credit card for legal authorization. Spouses or other individuals who claim verbal authorization to use your card are not able to provide sufficient legal authorization as they are not the valid cardholder.",
+      "source_url": "https://www.target.com/help/articles/payment-options/credit-debit-cards"
+    },
+
+    {
+      "id": "tax-001",
+      "category": "Taxes",
+      "question": "How does Target calculate sales tax?",
+      "answer": "Sales tax is a combined total of state, county, city, and district tax rates, based on either the shipment-origin address or the ship-to address as dictated by each state's tax law. Target provides a sales-tax estimate during checkout and on your order confirmation summary, but the final sales-tax charge may differ from the estimate because many factors can change before shipment.",
+      "source_url": "https://www.target.com/help/articles/orders-purchases/taxes"
+    },
+    {
+      "id": "tax-002",
+      "category": "Taxes",
+      "question": "Does Target charge sales tax in every state?",
+      "answer": "Target charges sales tax in every U.S. state except states with no sales tax: Delaware, Montana, New Hampshire, and Oregon. In Alaska, Target collects applicable local sales taxes. Orders shipped to Puerto Rico will be charged sales tax.",
+      "source_url": "https://www.target.com/help/articles/orders-purchases/taxes"
+    },
+    {
+      "id": "tax-003",
+      "category": "Taxes",
+      "question": "Are any items tax-free at Target?",
+      "answer": "Target does not charge sales tax for Target GiftCards. However, purchases made with Target GiftCards may be subject to tax. Additionally, some categories of items are not taxed in certain states. Both Target.com and Target stores participate in tax-free sales events and honor tax exemption on qualifying items during those events.",
+      "source_url": "https://www.target.com/help/articles/orders-purchases/taxes"
+    },
+    {
+      "id": "tax-004",
+      "category": "Taxes",
+      "question": "How do I set up a tax-exempt account on Target.com?",
+      "answer": "Create a Target.com account (this cannot be used for personal purchases). Then email tax.exempt@target.com with: proof of exemption in PNG, JPG, or PDF format for the state(s) where items will be shipped, your organization name, primary purchaser name, address, city, state, postal code, phone number, the Target.com account email, and organization type (Nonprofit or Government). Once approved, all subsequent purchases shipped to the documented exemption state(s) will be tax-free.",
+      "source_url": "https://www.target.com/help/articles/orders-purchases/taxes"
+    },
+    {
+      "id": "tax-005",
+      "category": "Taxes",
+      "question": "How do I get a refund for tax on a tax-exempt order?",
+      "answer": "To receive a refund for taxes paid on exempt Target.com purchases, email tax.exempt@target.com with your proof of exemption documentation. For exempt purchases made in store, return to the store for assistance. Target does not accept resale exemption certificates.",
+      "source_url": "https://www.target.com/help/articles/orders-purchases/taxes"
+    },
+
+    {
+      "id": "reg-001",
+      "category": "Registry & Wish List",
+      "question": "How do I create a Target registry or wish list?",
+      "answer": "On Target.com, visit the Registry & Wish List page, select which type you'd like to create, then follow the prompts. In the Target App, search for 'Wish List or Registry' or find it in the Categories list, then use the Create section and select your type. You can also visit Guest Services in store or call 1-800-440-0680 for help.",
+      "source_url": "https://www.target.com/help/articles/registries-lists/manage-your-registry"
+    },
+    {
+      "id": "reg-002",
+      "category": "Registry & Wish List",
+      "question": "What are the benefits of a Target Baby Registry?",
+      "answer": "Target Baby Registry is a free service. Benefits include: a Welcome Kit valued over $100 with samples and coupons, a 15% Registry Completion Discount for items left on your registry, a one-year return window for registry items, and checklists and tools to help you stay organized. The Welcome Kit is available as a Target Circle Bonus online when you create your registry.",
+      "source_url": "https://www.target.com/help/articles/registries-lists/manage-your-registry"
+    },
+    {
+      "id": "reg-003",
+      "category": "Registry & Wish List",
+      "question": "Can I make my Target registry or wish list private?",
+      "answer": "Yes. Under Registry settings, check the box 'Make my registry or wish list private across Target.com, Target stores, and other registry or partner sites.' Your shipping address, phone number, and email address will not be visible to anyone who views or orders from your registry, nor shared with other registry websites.",
+      "source_url": "https://www.target.com/help/articles/registries-lists/manage-your-registry"
+    },
+    {
+      "id": "reg-004",
+      "category": "Registry & Wish List",
+      "question": "How do I find someone's Target registry or wish list?",
+      "answer": "On Target.com, visit the Registry & Wish List page, enter the registrant's first and last name, then select Search and View registry or wish list. In the Target app, select shop all categories, scroll to Registry & wish list, select Find a registry or wish list, and search by name. You can also find registries in store at gift registry kiosks, usually located near Guest Services.",
+      "source_url": "https://www.target.com/help/articles/registries-lists/find-a-registry"
+    },
+    {
+      "id": "reg-005",
+      "category": "Registry & Wish List",
+      "question": "How do I mark registry items as purchased?",
+      "answer": "In store: have the cashier scan both the registry barcode and the gifts you are purchasing — the registry barcode is on the printout or in the registry on a mobile browser via the 'Scan at store checkout' button. Online: when items are added from the gift registry and purchased on Target.com, the list updates within 15 minutes. Gift givers can also manually mark items by searching the registry, locating the item, and selecting 'Mark as purchased.'",
+      "source_url": "https://www.target.com/help/articles/registries-lists/find-a-registry"
+    },
+
+    {
+      "id": "ship-001",
+      "category": "Shipping & Delivery",
+      "question": "What is Target Circle 360 and how does it affect shipping?",
+      "answer": "Target Circle 360 is a membership that includes free shipping on hundreds of thousands of items. A minimum purchase threshold may apply. Members also get benefits like free same-day delivery.",
+      "source_url": "https://www.target.com/help/articles/promotions-coupons/coupon-deals"
+    },
+
+    {
+      "id": "prot-001",
+      "category": "Protection Plans",
+      "question": "What does a Target protection plan cover?",
+      "answer": "Target protection plans (through Allstate Protection Plans) include parts and labor coverage to repair or replace your item during the plan term, surge protection from date of purchase, and a No Lemon Policy: if your covered product has two service repairs completed for the same problem and a third repair is needed within any 12-month period, the product will be replaced with a comparable product or a cash settlement via Target GiftCard or check. For eligible electronics, plans also cover accidental damage from handling for headphones, cameras, video cameras, MP3 players, eReaders, laptops, tablets, netbooks, and select portable electronics.",
+      "source_url": "https://www.target.com/help/articles/product-support-services/target-protection-plans"
+    },
+    {
+      "id": "prot-002",
+      "category": "Protection Plans",
+      "question": "How do I get help with my Target protection plan or return it?",
+      "answer": "For online help and FAQs, visit allstateprotectionplans.com/user/login or call a myTGTtech agent at 1-877-698-4883. Protection plans can be returned to the store within 30 or 90 days of purchase (depending on the item) for a full refund, less the cost of any service received. If purchased online, you can also call Target Guest Services at 1-800-591-3869. For plans purchased beyond the return window, manage and cancel at allstateprotectionplans.com.",
+      "source_url": "https://www.target.com/help/articles/product-support-services/target-protection-plans"
+    },
+
+    {
+      "id": "tech-001",
+      "category": "Tech Support",
+      "question": "What is myTGTtech support?",
+      "answer": "Target Tech Support provides pre-purchase guidance, post-purchase troubleshooting, and setup and connectivity help for Target electronics items. Services include setting up new Smart TVs, troubleshooting electronics devices, recommending related products, and helping with protection plans. You can reach Target Tech Support at 1-877-698-4883 from 7 a.m. to 11 p.m. Central Time, seven days a week. Have your receipt or packing slip and model number available when you call.",
+      "source_url": "https://www.target.com/help/articles/product-support-services/mytgt-tech-support"
+    },
+
+    {
+      "id": "cont-001",
+      "category": "Contact & Support",
+      "question": "How do I contact Target Guest Services?",
+      "answer": "You can contact Target Guest Services by calling 1-800-591-3869. For Target.com or app order issues, you can also chat online at target.com/help/contact-us. For Gift Registry and Wish List help, call 1-800-888-9333. For tech support, call 1-877-698-4883. For tax-exempt inquiries, email tax.exempt@target.com.",
+      "source_url": "https://www.target.com/help"
+    },
+    {
+      "id": "cont-002",
+      "category": "Contact & Support",
+      "question": "How do I track my Target order?",
+      "answer": "You can track your order at target.com/orders or in the Target app under your account. You will also receive shipping confirmation emails with tracking information.",
+      "source_url": "https://www.target.com/help"
+    },
+    {
+      "id": "cont-003",
+      "category": "Contact & Support",
+      "question": "How do I check my Target gift card balance?",
+      "answer": "You can check your Target gift card balance using the self-service experience at target.com/guest/gift-card-balance.",
+      "source_url": "https://www.target.com/help"
+    },
+    {
+      "id": "cont-004",
+      "category": "Contact & Support",
+      "question": "How do I find a Target store near me?",
+      "answer": "Use the store locator at target.com/store-locator/find-stores or in the Target app to find your nearest Target store, its hours, and services available.",
+      "source_url": "https://www.target.com/help"
+    },
+    {
+      "id": "cont-005",
+      "category": "Contact & Support",
+      "question": "Where can I find information about product recalls?",
+      "answer": "You can search or view recent product recalls at target.com/help/articles/news-safety/product-recalls.",
+      "source_url": "https://www.target.com/help"
+    }
+  ]
+}

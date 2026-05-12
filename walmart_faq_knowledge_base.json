@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "retailer": "Walmart",
+    "market": "US",
+    "source_summary": "Curated from publicly documented Walmart US policies. Verify against walmart.com/help before production use.",
+    "last_curated": "2026-05-12",
+    "total_faqs": 28,
+    "total_categories": 9
+  },
+  "faqs": [
+    {
+      "id": "wmt-ret-001",
+      "category": "Returns & Refunds",
+      "question": "What is Walmart's standard return policy?",
+      "answer": "Most items can be returned within 90 days of purchase to a Walmart store or by mail, with or without a receipt for most products. The return window starts on the delivery date for online orders.",
+      "source_url": "https://www.walmart.com/help/article/return-policy/10100655a3094db78bc8a6b6cfa84e36"
+    },
+    {
+      "id": "wmt-ret-002",
+      "category": "Returns & Refunds",
+      "question": "Are there shorter return windows for any items?",
+      "answer": "Yes — most major electronics like TVs, drones, and gaming hardware have a 30-day window. Cell phones (including prepaid) and pre-paid plans have a 14-day return window. Verify your specific item on the receipt or product page.",
+      "source_url": "https://www.walmart.com/help/article/return-policy"
+    },
+    {
+      "id": "wmt-ret-003",
+      "category": "Returns & Refunds",
+      "question": "How do free Walmart returns work?",
+      "answer": "Most items can be returned for free to any Walmart store. Online-only items can be returned by mail with a free prepaid label printed from your account, or scheduled for pickup directly from your home.",
+      "source_url": "https://www.walmart.com/help/article/returns-and-refunds"
+    },
+    {
+      "id": "wmt-ret-004",
+      "category": "Returns & Refunds",
+      "question": "How long do Walmart refunds take?",
+      "answer": "Refunds to your original payment method typically post within 5 to 10 business days after the return is processed. In-store returns are usually immediate to cash or the original card.",
+      "source_url": "https://www.walmart.com/help/article/returns-and-refunds"
+    },
+    {
+      "id": "wmt-plus-001",
+      "category": "Walmart+",
+      "question": "How much does Walmart+ cost?",
+      "answer": "Walmart Plus is 12 dollars and 95 cents per month, or 98 dollars per year. There is a 30-day free trial for new members.",
+      "source_url": "https://www.walmart.com/plus"
+    },
+    {
+      "id": "wmt-plus-002",
+      "category": "Walmart+",
+      "question": "What's included with Walmart+?",
+      "answer": "Walmart Plus includes free unlimited grocery delivery on eligible orders, free shipping with no minimum, member prices on fuel at participating stations, Paramount Plus Essential streaming, and Scan and Go in stores.",
+      "source_url": "https://www.walmart.com/plus"
+    },
+    {
+      "id": "wmt-plus-003",
+      "category": "Walmart+",
+      "question": "How do I cancel Walmart+?",
+      "answer": "Sign in to your account, go to Walmart Plus settings, and choose Cancel membership. You'll keep benefits through the end of the current billing period.",
+      "source_url": "https://www.walmart.com/plus"
+    },
+    {
+      "id": "wmt-ship-001",
+      "category": "Shipping & Delivery",
+      "question": "Does Walmart offer free shipping without a membership?",
+      "answer": "Yes — most orders of 35 dollars or more from Walmart.com ship free with standard delivery, typically arriving in 1 to 3 business days.",
+      "source_url": "https://www.walmart.com/cp/shipping/1088466"
+    },
+    {
+      "id": "wmt-ship-002",
+      "category": "Shipping & Delivery",
+      "question": "What is Walmart Express Delivery?",
+      "answer": "Express Delivery brings groceries and household items to your door in as little as one hour for an additional fee (around 10 dollars). Available in most areas Walmart serves with grocery delivery.",
+      "source_url": "https://www.walmart.com/cp/express-delivery/1106766"
+    },
+    {
+      "id": "wmt-ship-003",
+      "category": "Shipping & Delivery",
+      "question": "Can I pick up Walmart orders for free?",
+      "answer": "Yes — pickup is free at any Walmart store with no minimum order. Choose Pickup at checkout, and you'll get a notification when your order is ready, usually within hours. Curbside pickup is also free.",
+      "source_url": "https://www.walmart.com/cp/pickup/1088466"
+    },
+    {
+      "id": "wmt-pm-001",
+      "category": "Price Match",
+      "question": "Does Walmart price match competitors?",
+      "answer": "Walmart no longer offers in-store price matching against competitor retailers, but Walmart.com price guarantee still applies in some cases between online and in-store pricing for the same item.",
+      "source_url": "https://www.walmart.com/help/article/walmart-price-match-policy"
+    },
+    {
+      "id": "wmt-pm-002",
+      "category": "Price Match",
+      "question": "What if a Walmart item drops in price after I buy it?",
+      "answer": "Walmart does not guarantee post-purchase price adjustments. You can return the item within the standard window and rebuy at the lower price, or contact customer service for a possible one-time courtesy adjustment.",
+      "source_url": "https://www.walmart.com/help"
+    },
+    {
+      "id": "wmt-pay-001",
+      "category": "Payment Options",
+      "question": "What payment methods does Walmart accept?",
+      "answer": "Walmart accepts Visa, Mastercard, American Express, Discover, Walmart gift cards, Walmart Pay, Affirm for installments, EBT for eligible grocery items in store and online, and cash in stores.",
+      "source_url": "https://www.walmart.com/help/article/walmart-payment-methods"
+    },
+    {
+      "id": "wmt-pay-002",
+      "category": "Payment Options",
+      "question": "Can I use EBT online at Walmart?",
+      "answer": "Yes — Walmart accepts SNAP EBT online for eligible grocery items in all 50 states. Add your EBT card in Account settings, then select it as your payment method at checkout for SNAP-eligible items.",
+      "source_url": "https://www.walmart.com/cp/snap-ebt/1075978"
+    },
+    {
+      "id": "wmt-pay-003",
+      "category": "Payment Options",
+      "question": "What is Walmart Pay?",
+      "answer": "Walmart Pay is a contactless payment feature inside the Walmart app. Link your card once, then scan a QR code at any Walmart register to pay. It works with Apple Pay and Google Pay underneath for added security.",
+      "source_url": "https://www.walmart.com/cp/walmart-pay/3205993"
+    },
+    {
+      "id": "wmt-reg-001",
+      "category": "Registry & Lists",
+      "question": "How do I create a Walmart registry?",
+      "answer": "Visit walmart.com/registry and choose Baby, Wedding, or Custom (like housewarming). Add items from across Walmart's catalog. Registry items can typically be returned up to 1 year after the event date.",
+      "source_url": "https://www.walmart.com/registry"
+    },
+    {
+      "id": "wmt-reg-002",
+      "category": "Registry & Lists",
+      "question": "What's included in the Walmart baby registry welcome kit?",
+      "answer": "Walmart's baby registry includes a free welcome box with product samples (while supplies last), a completion discount on remaining items, and a 1-year return window on registry purchases.",
+      "source_url": "https://www.walmart.com/cp/baby-registry/1107185"
+    },
+    {
+      "id": "wmt-gc-001",
+      "category": "Gift Cards",
+      "question": "Do Walmart gift cards expire?",
+      "answer": "No — Walmart gift cards do not expire and have no fees. They can be used at any Walmart store, Walmart.com, and at Sam's Club.",
+      "source_url": "https://www.walmart.com/cp/giftcards/96894"
+    },
+    {
+      "id": "wmt-gc-002",
+      "category": "Gift Cards",
+      "question": "How do I check my Walmart gift card balance?",
+      "answer": "Go to walmart.com/giftcards and select Check balance. You can also check at any Walmart register or by calling the number on the back of the card.",
+      "source_url": "https://www.walmart.com/cp/check-gift-card-balance/1224003"
+    },
+    {
+      "id": "wmt-tax-001",
+      "category": "Taxes",
+      "question": "Does Walmart charge sales tax?",
+      "answer": "Yes — Walmart charges state and local sales tax based on the ship-to address. The four states with no statewide sales tax are Delaware, Montana, New Hampshire, and Oregon. Alaska may have local taxes.",
+      "source_url": "https://www.walmart.com/help/article/sales-tax"
+    },
+    {
+      "id": "wmt-tax-002",
+      "category": "Taxes",
+      "question": "Can I set up a tax-exempt account on Walmart?",
+      "answer": "Yes — eligible non-profits, government entities, and resellers can enroll in the Walmart Tax-Exempt Program. Apply through your account settings and upload your state-issued exemption certificate.",
+      "source_url": "https://www.walmart.com/help/article/walmart-tax-exemption-program"
+    },
+    {
+      "id": "wmt-mkt-001",
+      "category": "Marketplace Sellers",
+      "question": "What is Walmart Marketplace?",
+      "answer": "Walmart Marketplace lets approved third-party sellers list items on Walmart.com. Marketplace items show Sold and shipped by [seller name] on the product page. Walmart's return policy generally applies, but some categories vary.",
+      "source_url": "https://www.walmart.com/help/article/walmart-marketplace"
+    },
+    {
+      "id": "wmt-sup-001",
+      "category": "Contact & Support",
+      "question": "How do I contact Walmart customer service?",
+      "answer": "Call 1-800-925-6278 for general support, or chat live at walmart dot com slash help. In-store Guest Services can also help with in-person returns and exchanges.",
+      "source_url": "https://www.walmart.com/help"
+    },
+    {
+      "id": "wmt-sup-002",
+      "category": "Contact & Support",
+      "question": "How do I cancel a Walmart order?",
+      "answer": "Sign in, go to Purchase History, find the order, and select Cancel. If the order has already shipped or is being prepared for pickup, you may need to refuse delivery or return after it arrives.",
+      "source_url": "https://www.walmart.com/help/article/cancel-an-order"
+    },
+    {
+      "id": "wmt-sup-003",
+      "category": "Contact & Support",
+      "question": "How do I track a Walmart order?",
+      "answer": "Sign in to walmart.com or open the app, go to Purchase History, and select your order to see real-time tracking. You'll also get email and push notifications.",
+      "source_url": "https://www.walmart.com/orders"
+    },
+    {
+      "id": "wmt-sup-004",
+      "category": "Contact & Support",
+      "question": "What if my Walmart package was stolen or never arrived?",
+      "answer": "Wait until end-of-day past the delivery estimate, check with neighbors and your building, then go to Purchase History and select Help with this order. Walmart usually issues a replacement or refund quickly.",
+      "source_url": "https://www.walmart.com/help"
+    },
+    {
+      "id": "wmt-prot-001",
+      "category": "Protection Plans",
+      "question": "Does Walmart offer protection plans?",
+      "answer": "Yes — Walmart Protection Plans (powered by Allstate) are available on most electronics, appliances, and outdoor equipment. Add at checkout or within 30 days of purchase. Plans cover mechanical failures, accidental damage on select items, and power surges.",
+      "source_url": "https://www.walmart.com/cp/walmart-protection-plans/1088537"
+    },
+    {
+      "id": "wmt-tech-001",
+      "category": "Tech Support",
+      "question": "Does Walmart offer tech support?",
+      "answer": "Yes — Walmart partners with Asurion for tech support on covered items. If you have a Walmart Protection Plan, call the number on your plan documents. For basic setup questions, in-store Tech Services may be available at some locations.",
+      "source_url": "https://www.walmart.com/cp/walmart-protection-plans/1088537"
+    }
+  ]
+}

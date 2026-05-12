@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RADS — Retail Agent Dashboard System</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #f7f8fa;
+      --surface:   #ffffff;
+      --border:    #e5e7eb;
+      --border-2:  #eef0f4;
+      --ink:       #0f172a;
+      --ink-2:     #334155;
+      --muted:     #64748b;
+      --muted-2:   #94a3b8;
+      --accent:    #4f46e5;
+      --accent-2:  #eef2ff;
+      --ok:        #16a34a;
+      --ok-bg:     #ecfdf5;
+      --warn:      #d97706;
+      --warn-bg:   #fffbeb;
+      --danger:    #dc2626;
+      --danger-bg: #fef2f2;
+    }
+    html, body {
+      height: 100vh; overflow: hidden;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      color: var(--ink); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Top bar ─────────────────────────────────────────── */
+    .topbar {
+      height: 56px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      display: flex; align-items: center; gap: 18px;
+      flex-shrink: 0;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      color: #fff;
+      display: grid; place-items: center;
+    }
+    .brand-mark svg { width: 16px; height: 16px; }
+    .brand-name { font-weight: 700; letter-spacing: 0.3px; font-size: 15px; }
+
+    .tabs { display: flex; gap: 4px; margin-left: 8px; }
+    .tab {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .tab.active { background: var(--bg); color: var(--ink); }
+    .tab svg { width: 14px; height: 14px; }
+
+    .topbar .spacer { flex: 1; }
+
+    .counters { display: flex; gap: 14px; font-size: 12.5px; color: var(--muted); }
+    .counters .c { display: inline-flex; align-items: center; gap: 6px; }
+    .counters .c .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .counters .high .dot { background: var(--danger); }
+    .counters .medium .dot { background: var(--warn); }
+    .counters strong { color: var(--ink); font-weight: 600; }
+
+    .user-chip {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+    .avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fde68a, #f59e0b);
+      color: #92400e;
+      font-size: 11px; font-weight: 700;
+      display: grid; place-items: center;
+    }
+    .user-chip span { font-size: 12.5px; color: var(--ink-2); }
+
+    .icon-btn-sm {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      display: grid; place-items: center;
+      color: var(--muted); cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .icon-btn-sm:hover { background: var(--bg); border-color: var(--border); }
+    .icon-btn-sm svg { width: 14px; height: 14px; }
+
+    /* ─── Three-column layout ─────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      height: calc(100vh - 56px);
+    }
+    .col { background: var(--surface); overflow-y: auto; }
+    .col.left   { border-right: 1px solid var(--border); }
+    .col.right  { border-left: 1px solid var(--border); }
+
+    /* ─── Left queue ─────────────────────────────────────── */
+    .queue-head {
+      padding: 14px 16px 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .queue-head h3 { font-size: 14px; font-weight: 600; }
+    .queue-head .count { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .search {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .search input {
+      width: 100%;
+      padding: 7px 10px 7px 28px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 12.5px;
+      background: var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>") no-repeat 10px center;
+      outline: none;
+      color: var(--ink);
+    }
+    .search input:focus { border-color: var(--accent); background-color: var(--surface); }
+
+    .filters {
+      display: flex; gap: 6px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .filter {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 11.5px;
+      color: var(--muted);
+      background: var(--surface);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .filter:hover { color: var(--ink-2); }
+    .filter.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .ticket-card {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-2);
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .ticket-card:hover { background: var(--bg); }
+    .ticket-card.selected { background: var(--accent-2); border-left: 3px solid var(--accent); padding-left: 13px; }
+    .ticket-card .row1 {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .ticket-card .id { font-size: 11px; color: var(--muted-2); font-weight: 600; letter-spacing: 0.3px; }
+    .ticket-card .score {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600;
+    }
+    .score.high   { color: var(--danger); }
+    .score.medium { color: var(--warn); }
+    .score.low    { color: var(--ok); }
+    .ticket-card .name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .ticket-card .sub { font-size: 12px; color: var(--muted); margin-bottom: 4px; line-height: 1.35; }
+    .ticket-card .row2 {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: var(--muted-2);
+    }
+    .ticket-card .row2 .cat {
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .ticket-card .row2 .cat .sw { width: 6px; height: 6px; border-radius: 2px; }
+    .sw-amazon  { background: #ff9900; }
+    .sw-target  { background: #cc0000; }
+    .sw-walmart { background: #0071dc; }
+    .empty {
+      padding: 40px 20px; text-align: center;
+      font-size: 12.5px; color: var(--muted-2);
+    }
+
+    /* ─── Center pane ────────────────────────────────────── */
+    .col.center { padding: 0; display: flex; flex-direction: column; }
+    .risk-strip {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border-2);
+      display: flex; align-items: center; gap: 14px;
+      font-size: 12.5px;
+    }
+    .risk-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600; font-size: 12px;
+    }
+    .risk-pill.high   { background: var(--danger-bg); color: var(--danger); }
+    .risk-pill.medium { background: var(--warn-bg);   color: var(--warn); }
+    .risk-pill.low    { background: var(--ok-bg);     color: var(--ok); }
+    .risk-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .risk-strip .score-text { color: var(--muted); }
+    .risk-strip .score-text strong { color: var(--ink); }
+    .risk-strip .flag { color: var(--danger); font-weight: 600; font-size: 11.5px; letter-spacing: 0.4px; }
+    .risk-strip .ticket-id { margin-left: auto; font-size: 11.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.4px; }
+
+    .summary-row {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border-2);
+      display: flex; align-items: center; gap: 18px;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+    .summary-row .field { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+    .summary-row .field .ico { color: var(--muted-2); display: inline-flex; }
+    .summary-row .field .ico svg { width: 13px; height: 13px; }
+    .summary-row .sep { color: var(--muted-2); }
+    .summary-row .item { color: var(--ink-2); font-size: 12.5px; }
+
+    .pane-tabs {
+      display: flex; gap: 16px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .pane-tab {
+      padding: 10px 0;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .pane-tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+
+    .ticket-head {
+      padding: 14px 24px 10px;
+      border-bottom: 1px solid var(--border-2);
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+    }
+    .ticket-head .meta {
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .ticket-head .meta .urgent {
+      background: var(--danger-bg); color: var(--danger);
+      padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.4px;
+    }
+    .ticket-head h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
+    .ticket-head .from { font-size: 12.5px; color: var(--muted); }
+    .ticket-head .right-meta {
+      text-align: right;
+      font-size: 11.5px; color: var(--muted);
+      flex-shrink: 0;
+    }
+    .ticket-head .right-meta b { color: var(--ink-2); font-weight: 600; display: block; margin-bottom: 2px; }
+
+    .thread {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+    }
+    .msg {
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 92%;
+      white-space: pre-wrap;
+    }
+    .msg.user  { background: #f1f5f9; color: var(--ink); }
+    .msg.agent { background: var(--accent-2); color: var(--ink); margin-left: auto; }
+    .msg .role {
+      font-size: 10.5px; color: var(--muted);
+      font-weight: 600; letter-spacing: 0.6px;
+      margin-bottom: 4px; text-transform: uppercase;
+    }
+    .no-thread { font-size: 12.5px; color: var(--muted-2); text-align: center; padding: 40px 0; }
+
+    .reply-area {
+      padding: 12px 24px;
+      border-top: 1px solid var(--border-2);
+      background: #fbfcfd;
+    }
+    .reply-tools {
+      display: flex; gap: 8px; margin-bottom: 8px;
+    }
+    .tool-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--ink-2);
+      cursor: default;
+    }
+    .tool-chip.primary { background: var(--accent-2); border-color: #c7d2fe; color: var(--accent); font-weight: 600; }
+    .tool-chip svg { width: 13px; height: 13px; }
+    .reply-area textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      resize: vertical;
+      outline: none;
+    }
+    .reply-area textarea:focus { border-color: var(--accent); }
+
+    .agent-actions {
+      padding: 12px 24px 18px;
+      border-top: 1px solid var(--border-2);
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap;
+    }
+    .agent-actions .label-act {
+      font-size: 10.5px; letter-spacing: 1.2px; color: var(--muted-2); font-weight: 600; text-transform: uppercase;
+      margin-right: 6px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      border-radius: 7px;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn svg { width: 14px; height: 14px; }
+    .btn.approve  { background: var(--ok);     color: #fff; }
+    .btn.deny     { background: var(--surface); color: var(--danger); border-color: #fecaca; }
+    .btn.escalate { background: var(--surface); color: var(--ink-2);  border-color: var(--border); }
+    .btn.override { background: var(--surface); color: var(--ink-2);  border-color: var(--border); }
+    .btn:hover { filter: brightness(1.04); }
+    .review-flag {
+      margin-left: auto;
+      font-size: 11.5px;
+      color: var(--danger);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── Right Customer 360 ─────────────────────────────── */
+    .right h4 {
+      font-size: 11px; letter-spacing: 1.5px; color: var(--muted-2);
+      text-transform: uppercase; font-weight: 600;
+      padding: 14px 18px 8px;
+    }
+    .c360-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .c360-head .title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .c360-head .title .tt { font-size: 11px; letter-spacing: 1.3px; color: var(--muted-2); font-weight: 600; text-transform: uppercase; }
+    .c360-head .title a { color: var(--muted); }
+    .c360-head .cust-row { display: flex; align-items: center; gap: 12px; }
+    .c360-head .av {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, #fde68a, #f59e0b);
+      color: #92400e; display: grid; place-items: center;
+      font-weight: 700; font-size: 13px;
+    }
+    .c360-head .nm { font-size: 13.5px; font-weight: 600; }
+    .c360-head .em { font-size: 11.5px; color: var(--muted); }
+    .c360-head .risk-line {
+      margin-top: 12px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px;
+    }
+    .c360-head .risk-line .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    .kv {
+      padding: 8px 18px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border-2);
+      font-size: 13px;
+    }
+    .kv .ico { color: var(--muted-2); display: inline-flex; }
+    .kv .ico svg { width: 13px; height: 13px; }
+    .kv .lab { color: var(--ink-2); flex: 1; }
+    .kv .val { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .kv .val.bad { color: var(--danger); }
+    .kv .val.warn { color: var(--warn); }
+
+    .pol-card {
+      margin: 8px 18px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-2);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    .pol-card .tt {
+      font-size: 12.5px; font-weight: 600; color: var(--ink);
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 4px;
+    }
+    .pol-card .tt svg { width: 12px; height: 12px; color: var(--muted-2); }
+    .pol-card p { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      padding: 10px 16px;
+      background: var(--ink); color: #fff;
+      border-radius: 8px;
+      font-size: 12.5px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Rubric / Export / Send button shared style */
+    .pill-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-2);
+      border-radius: 6px;
+      font-size: 12px; font-weight: 500;
+      cursor: pointer;
+    }
+    .pill-btn:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
+    .pill-btn svg { width: 12px; height: 12px; }
+
+    /* Live-call indicator dot in queue cards */
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ok); display: inline-block;
+      box-shadow: 0 0 0 0 rgba(22,163,74,0.45);
+      animation: pulse-live 1.4s infinite;
+      margin-right: 5px; vertical-align: middle;
+    }
+    @keyframes pulse-live {
+      0%   { box-shadow: 0 0 0 0 rgba(22,163,74,0.5); }
+      70%  { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+      100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(15,23,42,0.45);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 50;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: 12px;
+      width: min(620px, 92vw);
+      max-height: 86vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .modal-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-2);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-head h2 { font-size: 15px; font-weight: 600; }
+    .modal-close {
+      width: 28px; height: 28px;
+      display: grid; place-items: center;
+      cursor: pointer; color: var(--muted);
+      border-radius: 6px;
+    }
+    .modal-close:hover { background: var(--bg); }
+    .modal-body { padding: 16px 20px 20px; font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+    .modal-body h3 {
+      font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase;
+      color: var(--muted-2); font-weight: 600;
+      margin: 14px 0 6px;
+    }
+    .modal-body h3:first-child { margin-top: 0; }
+    .modal-body table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .modal-body th, .modal-body td {
+      padding: 7px 0;
+      text-align: left;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .modal-body th { color: var(--muted); font-weight: 500; }
+    .modal-body td.val { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+
+    /* Templates popover */
+    .tmpl-popover {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      padding: 6px;
+      z-index: 20;
+      min-width: 260px;
+      display: none;
+    }
+    .tmpl-popover.show { display: block; }
+    .tmpl-item {
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: var(--ink-2);
+      cursor: pointer;
+    }
+    .tmpl-item:hover { background: var(--bg); }
+    .tmpl-item strong { display: block; font-size: 12px; color: var(--ink); margin-bottom: 2px; font-weight: 600; }
+    .tmpl-item span { color: var(--muted-2); font-size: 11.5px; }
+
+    /* Score breakdown table (Reasoning tab) */
+    .score-card {
+      padding: 16px 24px;
+      font-size: 13px;
+    }
+    .score-card h3 {
+      font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase;
+      color: var(--muted-2); font-weight: 600;
+      margin: 16px 0 6px;
+    }
+    .score-card h3:first-child { margin-top: 0; }
+    .score-card .total {
+      display: inline-flex; align-items: baseline; gap: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .score-card .total .n { font-size: 26px; font-weight: 700; color: var(--ink); }
+    .score-card .total .lab { font-size: 12px; color: var(--muted); }
+    .score-card table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .score-card td { padding: 6px 0; border-bottom: 1px solid var(--border-2); font-size: 12.5px; }
+    .score-card td.val { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+    .score-card .why { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 8px; }
+
+    /* Audit log */
+    .audit-card { padding: 16px 24px; font-size: 12.5px; }
+    .audit-card .row {
+      display: flex; gap: 14px; padding: 8px 0;
+      border-bottom: 1px solid var(--border-2);
+    }
+    .audit-card .row:last-child { border-bottom: none; }
+    .audit-card .when {
+      width: 130px; font-variant-numeric: tabular-nums;
+      color: var(--muted); font-size: 12px; flex-shrink: 0;
+    }
+    .audit-card .who { font-weight: 600; color: var(--ink-2); width: 110px; flex-shrink: 0; }
+    .audit-card .what { color: var(--ink-2); flex: 1; }
+    .audit-card .what em { color: var(--muted); font-style: normal; }
+
+    /* Send row (reply area) */
+    .send-row { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; align-items: center; }
+    .send-row .hint { font-size: 11px; color: var(--muted-2); margin-right: auto; }
+    .btn-send {
+      padding: 6px 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 12.5px; font-weight: 500;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-send:hover { filter: brightness(1.05); }
+    .btn-send svg { width: 12px; height: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="brand-name">RADS</div>
+    </div>
+    <div class="tabs">
+      <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Workspace</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="15"/></svg>Dashboard</div>
+      <a class="tab" href="/" target="_blank" style="color:var(--muted);text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Voice Tickets</a>
+    </div>
+    <div class="spacer"></div>
+    <div class="counters">
+      <span class="c high"><span class="dot"></span><strong id="ct-high">0</strong> high</span>
+      <span class="c medium"><span class="dot"></span><strong id="ct-medium">0</strong> medium</span>
+    </div>
+    <button class="pill-btn" id="open-rubric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Rubric</button>
+    <div class="icon-btn-sm" title="Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+    <div class="user-chip"><div class="avatar">SA</div><span>Sarah A.</span></div>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT QUEUE -->
+    <aside class="col left">
+      <div class="queue-head">
+        <h3>Queue</h3>
+        <span class="count" id="queue-count">0/0</span>
+      </div>
+      <div class="search"><input id="search-input" placeholder="Search..."/></div>
+      <div class="filters">
+        <div class="filter active" data-f="all">All</div>
+        <div class="filter" data-f="high">High</div>
+        <div class="filter" data-f="medium">Medium</div>
+        <div class="filter" data-f="resolved">Resolved</div>
+      </div>
+      <div id="queue"></div>
+    </aside>
+
+    <!-- CENTER -->
+    <section class="col center" id="center">
+      <div class="empty" style="padding: 80px 24px">
+        <div style="font-size: 14px; color: var(--ink-2); font-weight: 600; margin-bottom: 6px;">Select a ticket to begin</div>
+        <div style="font-size: 12.5px;">Tickets are created automatically when Reya files them during voice calls.</div>
+      </div>
+    </section>
+
+    <!-- RIGHT CUSTOMER 360 -->
+    <aside class="col right" id="right">
+      <div class="empty" style="padding: 40px 18px;">No customer selected.</div>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Rubric modal -->
+  <div class="modal-overlay" id="rubric-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Risk Scoring Rubric · 0–200 scale</h2>
+        <div class="modal-close" id="close-rubric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+      </div>
+      <div class="modal-body">
+        <p>Every ticket gets a deterministic risk score. The final <strong>HIGH / MEDIUM / LOW</strong> priority is derived from the score — Reya's declared priority can be overridden if customer history or issue type pushes the score across a threshold.</p>
+
+        <h3>A · Base severity</h3>
+        <table><tbody>
+          <tr><th>High issue declared</th><td class="val">+60</td></tr>
+          <tr><th>Medium issue declared</th><td class="val">+30</td></tr>
+          <tr><th>Low issue declared</th><td class="val">+10</td></tr>
+          <tr><th>Voice call (no action filed yet)</th><td class="val">+5</td></tr>
+        </tbody></table>
+
+        <h3>B · Customer-risk multipliers</h3>
+        <table><tbody>
+          <tr><th>Refunds in last 6 months</th><td class="val">+4 each · cap +40</td></tr>
+          <tr><th>No-shows</th><td class="val">+8 each · cap +40</td></tr>
+          <tr><th>Account &lt; 1 month</th><td class="val">+30</td></tr>
+          <tr><th>Account &lt; 3 months</th><td class="val">+20</td></tr>
+          <tr><th>Account &lt; 12 months</th><td class="val">+10</td></tr>
+          <tr><th>Lifetime refunds &gt; 20</th><td class="val">+15</td></tr>
+        </tbody></table>
+
+        <h3>C · Issue-type modifiers</h3>
+        <table><tbody>
+          <tr><th>Fraud / payment / account security</th><td class="val">+30</td></tr>
+          <tr><th>Account locked</th><td class="val">+30</td></tr>
+          <tr><th>Refund dispute</th><td class="val">+20</td></tr>
+          <tr><th>Billing</th><td class="val">+20</td></tr>
+          <tr><th>Missing order / damaged item</th><td class="val">+10</td></tr>
+        </tbody></table>
+
+        <h3>D · Final priority thresholds</h3>
+        <table><tbody>
+          <tr><th><span style="color:var(--danger);font-weight:600">HIGH</span> · senior review required</th><td class="val">score ≥ 110</td></tr>
+          <tr><th><span style="color:var(--warn);font-weight:600">MEDIUM</span> · standard queue</th><td class="val">60–109</td></tr>
+          <tr><th><span style="color:var(--ok);font-weight:600">LOW</span> · auto-resolvable</th><td class="val">&lt; 60</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+<script>
+const RETAILER_LABELS = { amazon: "Amazon", target: "Target", walmart: "Walmart" };
+const RETAILER_SW = { amazon: "sw-amazon", target: "sw-target", walmart: "sw-walmart" };
+
+let state = {
+  tickets: [],
+  counts: { total: 0, high: 0, medium: 0, resolved: 0 },
+  filter: "all",
+  search: "",
+  selectedId: null,
+  selectedDetail: null,
+};
+
+const $ = (id) => document.getElementById(id);
+
+function fmtMonthsAgo(m) {
+  if (m < 1) return "<1 mo";
+  if (m < 12) return `${m} mo`;
+  const y = Math.floor(m / 12);
+  return `${y} yr${y > 1 ? "s" : ""}`;
+}
+function timeAgo(iso) {
+  const ms = Date.now() - new Date(iso).getTime();
+  const min = Math.floor(ms / 60000);
+  if (min < 1) return "just now";
+  if (min < 60) return `${min}m ago`;
+  const h = Math.floor(min / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  return `${d}d ago`;
+}
+function fmtDateTime(iso) {
+  return new Date(iso).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+}
+function priorityClass(p) { return p === "high" ? "high" : p === "medium" ? "medium" : "low"; }
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+async function loadQueue() {
+  const params = new URLSearchParams();
+  if (state.filter === "high")     params.set("priority", "high");
+  if (state.filter === "medium")   params.set("priority", "medium");
+  if (state.filter === "resolved") params.set("status", "resolved");
+  if (state.search) params.set("q", state.search);
+  try {
+    const r = await fetch(`/tickets?${params}`);
+    const data = await r.json();
+    state.tickets = data.tickets;
+    state.counts = data.counts;
+    renderQueue();
+    renderCounters();
+    if (state.selectedId) {
+      const stillExists = state.tickets.find((t) => t.id === state.selectedId);
+      if (!stillExists) clearSelection();
+    }
+  } catch (e) {
+    console.error("loadQueue", e);
+  }
+}
+
+function renderCounters() {
+  $("ct-high").textContent   = state.counts.high;
+  $("ct-medium").textContent = state.counts.medium;
+  $("queue-count").textContent = `${state.tickets.length}/${state.counts.total}`;
+}
+
+function renderQueue() {
+  const el = $("queue");
+  if (!state.tickets.length) {
+    el.innerHTML = `<div class="empty">No tickets yet.<br/><br/>Tickets show up here when Reya files them during voice calls.</div>`;
+    return;
+  }
+  el.innerHTML = state.tickets.map((t) => {
+    const pri = t.priority;
+    const isActive = t.status === "active";
+    const statusLabel = isActive
+      ? `<span class="live-dot"></span>live`
+      : t.status === "pending" ? timeAgo(t.createdAt)
+      : t.status === "closed_no_action" ? "no action"
+      : t.status;
+    return `
+      <div class="ticket-card ${state.selectedId === t.id ? "selected" : ""}" data-id="${t.id}">
+        <div class="row1">
+          <span class="id">${isActive ? '<span class="live-dot"></span>' : ""}${t.id}</span>
+          <span class="score ${priorityClass(pri)}">${t.score} ${pri === "high" ? "High" : pri === "medium" ? "Med" : "Low"}</span>
+        </div>
+        <div class="name">${escapeHtml(t.customer.name)}</div>
+        <div class="sub">${escapeHtml(t.title)}</div>
+        <div class="row2">
+          <span class="cat"><span class="sw ${RETAILER_SW[t.retailer] || "sw-target"}"></span>${RETAILER_LABELS[t.retailer] || t.retailer}</span>
+          <span>${statusLabel}</span>
+        </div>
+      </div>`;
+  }).join("");
+  el.querySelectorAll(".ticket-card").forEach((card) => {
+    card.addEventListener("click", () => selectTicket(card.dataset.id));
+  });
+}
+
+async function selectTicket(id, opts = {}) {
+  state.selectedId = id;
+  document.querySelectorAll(".ticket-card").forEach((c) => c.classList.toggle("selected", c.dataset.id === id));
+  try {
+    const r = await fetch(`/tickets/${id}`);
+    if (!r.ok) {
+      if (opts.fromHash) { toast(`Ticket ${id} not found`); window.location.hash = ""; clearSelection(); }
+      return;
+    }
+    const data = await r.json();
+    state.selectedDetail = data;
+    renderCenter(data.ticket, data.transcript);
+    renderRight(data.ticket);
+    if (!opts.silent) window.location.hash = id;
+  } catch (e) {
+    console.error("selectTicket", e);
+  }
+}
+
+function clearSelection() {
+  state.selectedId = null;
+  state.selectedDetail = null;
+  $("center").innerHTML = `<div class="empty" style="padding: 80px 24px"><div style="font-size:14px;color:var(--ink-2);font-weight:600;margin-bottom:6px;">Select a ticket to begin</div><div style="font-size:12.5px;">Tickets are created automatically when Reya files them during voice calls.</div></div>`;
+  $("right").innerHTML  = `<div class="empty" style="padding: 40px 18px;">No customer selected.</div>`;
+}
+
+function renderCenter(t, transcript) {
+  const pri = t.priority;
+  const retailer = RETAILER_LABELS[t.retailer] || t.retailer;
+  const isHigh = pri === "high";
+  const isActive = t.status === "active";
+  const flag = isHigh ? `<span class="flag">FLAGGED FOR SENIOR REVIEW</span>` : "";
+  const reviewBanner = isHigh ? `<span class="review-flag">Senior Review Required</span>` : "";
+
+  const turns = (transcript && transcript.turns) || [];
+  const threadHtml = turns.length ? turns.map((tu) => `
+    <div class="msg ${tu.role === "user" ? "user" : "agent"}">
+      <div class="role">${tu.role === "user" ? "Customer" : "Reya"}</div>
+      ${escapeHtml(tu.text)}
+    </div>`).join("") : `<div class="no-thread">${isActive ? "Call in progress — transcript will populate live." : "No transcript available for this ticket."}</div>`;
+
+  // Reasoning view: score breakdown
+  const breakdown = t.scoreBreakdown || [];
+  const reasoningHtml = `
+    <div class="score-card">
+      <h3>Final Score</h3>
+      <div class="total"><span class="n">${t.score}</span><span class="lab">${pri.toUpperCase()} · threshold ${pri === "high" ? "≥ 110" : pri === "medium" ? "60–109" : "< 60"}</span></div>
+      <h3>Breakdown</h3>
+      <table><tbody>
+        ${breakdown.map((b) => `<tr><td>${escapeHtml(b.factor)}</td><td class="val">+${b.value}</td></tr>`).join("") || `<tr><td colspan="2" style="color:var(--muted-2)">No breakdown available.</td></tr>`}
+      </tbody></table>
+      <p class="why">Priority derived from total score, not directly from Reya's declaration. See <a href="#" id="open-rubric-inline" style="color:var(--accent)">scoring rubric</a> for weights.</p>
+      <h3>Issue Type</h3>
+      <p>${escapeHtml(t.issue_type)} — ${escapeHtml(t.retailer)}</p>
+      <h3>Description</h3>
+      <p>${escapeHtml(t.description)}</p>
+    </div>`;
+
+  // Audit view: actions log
+  const actions = t.actions || [];
+  const auditHtml = `
+    <div class="audit-card">
+      ${actions.length === 0 ? `<div style="color:var(--muted-2)">No actions recorded.</div>` :
+        actions.map((a) => `
+          <div class="row">
+            <div class="when">${fmtDateTime(a.at)}</div>
+            <div class="who">${escapeHtml(a.by || "system")}</div>
+            <div class="what"><strong>${escapeHtml(a.type)}</strong>${a.channel ? ` <em>· ${escapeHtml(a.channel)}</em>` : ""}${a.note ? ` <em>· ${escapeHtml(a.note)}</em>` : ""}${a.text ? `<div style="margin-top:4px;color:var(--ink-2);font-size:12px;">${escapeHtml(a.text).slice(0, 280)}</div>` : ""}</div>
+          </div>
+        `).join("")}
+    </div>`;
+
+  $("center").innerHTML = `
+    <div class="risk-strip">
+      <span class="risk-pill ${priorityClass(pri)}"><span class="dot"></span>${pri === "high" ? "High Risk" : pri === "medium" ? "Medium" : "Low"}</span>
+      <span class="score-text">Score: <strong>${t.score}</strong></span>
+      ${flag}
+      ${isActive ? `<span class="risk-pill" style="background:var(--ok-bg);color:var(--ok);"><span class="live-dot" style="background:var(--ok);"></span>LIVE CALL</span>` : ""}
+      <span class="ticket-id">${t.id}</span>
+    </div>
+
+    <div class="summary-row">
+      <span class="field"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>${escapeHtml(t.customer.name)}</span>
+      <span class="sep">·</span>
+      <span class="field"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>${t.id}</span>
+      <span class="sep">·</span>
+      <span class="field item">${escapeHtml(t.issue_type)}</span>
+      <span class="sep">·</span>
+      <span class="field item">${retailer}</span>
+      <span style="margin-left:auto"><button class="pill-btn" id="export-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button></span>
+    </div>
+
+    <div class="pane-tabs">
+      <div class="pane-tab active" data-tab="chat">Ticket &amp; Chat</div>
+      <div class="pane-tab" data-tab="reasoning">Reasoning</div>
+      <div class="pane-tab" data-tab="audit">Audit</div>
+    </div>
+
+    <div id="tab-chat" class="tab-pane">
+      <div class="ticket-head">
+        <div>
+          <div class="meta">TKT-${t.id.replace("RC-","")} · Voice · <span class="urgent">${pri.toUpperCase()}</span></div>
+          <h2>${escapeHtml(t.title)}</h2>
+          <div class="from">${escapeHtml(t.customer.name)} · ${escapeHtml(t.customer.email)}</div>
+        </div>
+        <div class="right-meta">
+          <b>${turns.length} turns</b>
+          <div>Opened ${fmtDateTime(t.createdAt)}</div>
+        </div>
+      </div>
+
+      <div class="thread">${threadHtml}</div>
+
+      <div class="reply-area">
+        <div class="reply-tools">
+          <span class="tool-chip primary" id="ai-assist-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span id="ai-assist-label">AI Assist</span></span>
+          <span class="tool-chip" id="templates-btn" style="position:relative;cursor:pointer">Quick Templates ▾
+            <div class="tmpl-popover" id="tmpl-pop" style="top:100%;left:0;margin-top:6px;">
+              <div class="tmpl-item" data-tmpl="ack"><strong>Acknowledge receipt</strong><span>Confirm we received the issue and set expectations.</span></div>
+              <div class="tmpl-item" data-tmpl="refund_approved"><strong>Refund approved</strong><span>Notify that the refund has been approved.</span></div>
+              <div class="tmpl-item" data-tmpl="refund_denied"><strong>Refund denied — policy</strong><span>Politely deny and cite policy.</span></div>
+              <div class="tmpl-item" data-tmpl="more_info"><strong>Request more info</strong><span>Ask for order number / photos / timestamps.</span></div>
+              <div class="tmpl-item" data-tmpl="escalation"><strong>Senior agent follow-up</strong><span>Notify of escalation to senior agent.</span></div>
+            </div>
+          </span>
+          <span class="tool-chip" id="policy-btn" style="cursor:pointer">Policy</span>
+        </div>
+        <textarea id="reply-text" placeholder="Write your reply..."></textarea>
+        <div class="send-row">
+          <span class="hint" id="reply-hint">Sends as internal note · not delivered to customer</span>
+          <button class="btn-send" id="send-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send</button>
+        </div>
+      </div>
+
+      <div class="agent-actions">
+        <span class="label-act">Agent Actions</span>
+        <button class="btn approve" data-act="resolved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Approve</button>
+        <button class="btn deny" data-act="denied"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Deny</button>
+        <button class="btn escalate" data-act="escalated"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>Escalate</button>
+        <button class="btn override" data-act="pending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>Override</button>
+        ${reviewBanner}
+      </div>
+    </div>
+
+    <div id="tab-reasoning" class="tab-pane" style="display:none">${reasoningHtml}</div>
+    <div id="tab-audit" class="tab-pane" style="display:none">${auditHtml}</div>
+  `;
+
+  // Wire actions
+  $("center").querySelectorAll(".btn[data-act]").forEach((b) => {
+    b.addEventListener("click", () => updateTicket(t.id, b.dataset.act));
+  });
+
+  // Tabs
+  $("center").querySelectorAll(".pane-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      $("center").querySelectorAll(".pane-tab").forEach((x) => x.classList.remove("active"));
+      tab.classList.add("active");
+      ["chat", "reasoning", "audit"].forEach((k) => {
+        const el = $("tab-" + k);
+        if (el) el.style.display = tab.dataset.tab === k ? "" : "none";
+      });
+    });
+  });
+
+  // Export
+  const exportBtn = $("export-btn");
+  if (exportBtn) exportBtn.addEventListener("click", () => exportTicket(t, transcript));
+
+  // AI Assist
+  const assistBtn = $("ai-assist-btn");
+  if (assistBtn) assistBtn.addEventListener("click", () => aiAssist(t.id));
+
+  // Send reply
+  const sendBtn = $("send-btn");
+  if (sendBtn) sendBtn.addEventListener("click", () => sendReply(t.id));
+
+  // Templates popover
+  const tmplBtn = $("templates-btn");
+  const tmplPop = $("tmpl-pop");
+  if (tmplBtn && tmplPop) {
+    tmplBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      tmplPop.classList.toggle("show");
+    });
+    document.addEventListener("click", () => tmplPop.classList.remove("show"));
+    tmplPop.querySelectorAll(".tmpl-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const text = templateText(item.dataset.tmpl, t);
+        $("reply-text").value = text;
+        tmplPop.classList.remove("show");
+      });
+    });
+  }
+
+  // Policy chip → focus right column
+  const policyBtn = $("policy-btn");
+  if (policyBtn) policyBtn.addEventListener("click", () => {
+    document.querySelector(".col.right")?.scrollTo({ top: 0, behavior: "smooth" });
+    toast("Policy reference shown in right panel");
+  });
+
+  // Inline rubric link in Reasoning view
+  const inlineRubric = $("open-rubric-inline");
+  if (inlineRubric) inlineRubric.addEventListener("click", (e) => { e.preventDefault(); openRubric(); });
+}
+
+function templateText(kind, t) {
+  const first = (t.customer.name || "there").split(" ")[0];
+  switch (kind) {
+    case "ack": return `Hi ${first},\n\nThanks for reaching out about ${t.title}. I've received your ticket (${t.id}) and our team is reviewing it now. I'll have an update for you within 24 hours.\n\nBest regards,\nSupport Team`;
+    case "refund_approved": return `Hi ${first},\n\nGood news — your refund request on ticket ${t.id} has been approved. You should see the credit on your original payment method within 5–10 business days.\n\nLet us know if you have any questions.\n\nBest regards,\nSupport Team`;
+    case "refund_denied": return `Hi ${first},\n\nThank you for your patience while we reviewed ticket ${t.id}. After reviewing the details, we're unable to approve the refund under ${RETAILER_LABELS[t.retailer]}'s current policy. If you believe this was reviewed in error, please reply with any additional context and we'll re-evaluate.\n\nBest regards,\nSupport Team`;
+    case "more_info": return `Hi ${first},\n\nTo move ticket ${t.id} forward, could you reply with:\n- The order or booking number\n- Photos of the item / receipt if relevant\n- The exact date and time the issue occurred\n\nThanks!\n\nBest regards,\nSupport Team`;
+    case "escalation": return `Hi ${first},\n\nYour case (${t.id}) has been escalated to a senior support agent who will personally follow up with you within the next few hours. Thank you for your patience.\n\nBest regards,\nSupport Team`;
+    default: return "";
+  }
+}
+
+async function aiAssist(id) {
+  const lab = $("ai-assist-label");
+  if (lab) lab.textContent = "Drafting…";
+  try {
+    const r = await fetch(`/tickets/${id}/assist`, { method: "POST" });
+    const data = await r.json();
+    if (data.draft) {
+      $("reply-text").value = data.draft;
+      toast("AI draft inserted");
+    } else {
+      toast(`AI Assist failed: ${data.error || "unknown"}`);
+    }
+  } catch (e) {
+    toast("AI Assist failed");
+  }
+  if (lab) lab.textContent = "AI Assist";
+}
+
+async function sendReply(id) {
+  const text = $("reply-text").value.trim();
+  if (!text) { toast("Reply is empty"); return; }
+  try {
+    await fetch(`/tickets/${id}/reply`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, channel: "internal_note" }),
+    });
+    $("reply-text").value = "";
+    toast("Reply saved to ticket audit log");
+    await selectTicket(id);
+  } catch (e) {
+    toast("Send failed");
+  }
+}
+
+function exportTicket(t, transcript) {
+  const blob = new Blob([JSON.stringify({ ticket: t, transcript }, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${t.id}_${t.retailer}_${(t.customer.name || "anon").replace(/\s+/g, "_")}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast(`Exported ${t.id}.json`);
+}
+
+function renderRight(t) {
+  const c = t.customer;
+  const initials = c.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+  const refundsBad = c.refunds6mo > 15;
+  $("right").innerHTML = `
+    <div class="c360-head">
+      <div class="title">
+        <span class="tt">Customer 360</span>
+        <a href="#" title="Open profile">›</a>
+      </div>
+      <div class="cust-row">
+        <div class="av">${initials}</div>
+        <div>
+          <div class="nm">${escapeHtml(c.name)}</div>
+          <div class="em">${escapeHtml(c.email)}</div>
+        </div>
+      </div>
+      <div class="risk-line">
+        <span class="dot" style="background: ${t.priority === "high" ? "var(--danger)" : t.priority === "medium" ? "var(--warn)" : "var(--ok)"}"></span>
+        <span style="color: var(--ink-2); font-weight: 600;">${t.score}</span>
+        <span style="color: var(--muted);">${t.priority === "high" ? "High Risk" : t.priority === "medium" ? "Medium" : "Low"}</span>
+      </div>
+    </div>
+
+    <h4>Account</h4>
+    <div class="kv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="lab">Member since</span><span class="val">${fmtMonthsAgo(c.memberSinceMonths)}</span></div>
+    <div class="kv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg></span><span class="lab">Refunds (6 mo)</span><span class="val ${refundsBad ? "bad" : ""}">${c.refunds6mo}</span></div>
+    <div class="kv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="lab">Lifetime refunds</span><span class="val">${c.lifetimeRefunds}</span></div>
+    <div class="kv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><span class="lab">No-shows</span><span class="val ${c.noShows > 2 ? "warn" : ""}">${c.noShows} prev</span></div>
+
+    <h4>Policy Reference</h4>
+    <div class="pol-card">
+      <div class="tt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Serial Refund Threshold</div>
+      <p>&gt;15 refunds in 6 months with tenure &lt;12 months flags for senior review.</p>
+    </div>
+    <div class="pol-card">
+      <div class="tt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${RETAILER_LABELS[t.retailer]} Return Window</div>
+      <p>${t.retailer === "amazon" ? "Standard returns within 30 days of delivery; registry items 365 days." : t.retailer === "target" ? "90 days standard; 30 days for Target Plus; 1 year for registries." : "90 days standard; 30 days for major electronics; 14 days for cell phones."}</p>
+    </div>
+    <div class="pol-card">
+      <div class="tt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>New Account Policy</div>
+      <p>Accounts &lt;90 days requesting high-value refunds need extra verification.</p>
+    </div>
+    <div class="pol-card">
+      <div class="tt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Escalation Guideline</div>
+      <p>Fraud, payment disputes, and account security claims must route to a senior agent within 1 hour.</p>
+    </div>
+    <div style="height: 24px;"></div>
+  `;
+}
+
+async function updateTicket(id, status) {
+  try {
+    const r = await fetch(`/tickets/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status, action: status }),
+    });
+    const data = await r.json();
+    toast(`Ticket ${id} → ${status}`);
+    await loadQueue();
+    if (state.selectedId === id) await selectTicket(id);
+  } catch (e) {
+    toast("Update failed");
+  }
+}
+
+document.querySelectorAll(".filter").forEach((f) => {
+  f.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach((x) => x.classList.remove("active"));
+    f.classList.add("active");
+    state.filter = f.dataset.f;
+    loadQueue();
+  });
+});
+
+$("search-input").addEventListener("input", (e) => {
+  state.search = e.target.value.trim();
+  loadQueue();
+});
+
+// Rubric modal
+function openRubric()  { $("rubric-modal").classList.add("show"); }
+function closeRubric() { $("rubric-modal").classList.remove("show"); }
+$("open-rubric").addEventListener("click", openRubric);
+$("close-rubric").addEventListener("click", closeRubric);
+$("rubric-modal").addEventListener("click", (e) => { if (e.target.id === "rubric-modal") closeRubric(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeRubric(); });
+
+// Deep-link support: open #RC-001 directly, sync hash with selection, react to hash changes
+function applyHash() {
+  const id = (location.hash || "").replace(/^#/, "").trim();
+  if (id && id !== state.selectedId) selectTicket(id, { fromHash: true, silent: true });
+}
+window.addEventListener("hashchange", applyHash);
+
+// Auto-refresh: faster cadence so live calls reflect quickly
+let pollTimer = null;
+async function startPolling() {
+  await loadQueue();
+  applyHash();
+  // If the selected ticket is an active call, refresh its detail too
+  pollTimer = setInterval(async () => {
+    await loadQueue();
+    const sel = state.tickets.find((t) => t.id === state.selectedId);
+    if (sel && sel.status === "active") {
+      const r = await fetch(`/tickets/${sel.id}`);
+      if (r.ok) {
+        const data = await r.json();
+        state.selectedDetail = data;
+        renderCenter(data.ticket, data.transcript);
+        renderRight(data.ticket);
+      }
+    }
+  }, 2000);
+}
+startPolling();
+</script>
+</body>
+</html>

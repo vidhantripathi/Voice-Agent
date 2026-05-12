@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "retailer": "Amazon",
+    "market": "US",
+    "source_summary": "Curated from publicly documented Amazon US policies. Verify against amazon.com/help before production use.",
+    "last_curated": "2026-05-12",
+    "total_faqs": 28,
+    "total_categories": 9
+  },
+  "faqs": [
+    {
+      "id": "amz-ret-001",
+      "category": "Returns & Refunds",
+      "question": "What is Amazon's standard return policy?",
+      "answer": "Most items sold by Amazon can be returned within 30 days of receipt for a full refund. Some categories (e.g., apparel, baby items) may have longer windows during the holiday season. Marketplace sellers may set their own return windows.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7"
+    },
+    {
+      "id": "amz-ret-002",
+      "category": "Returns & Refunds",
+      "question": "How do free Amazon returns work?",
+      "answer": "Many items qualify for free returns. You can drop off the item at a UPS store, Whole Foods, Kohl's, Amazon Hub Locker, or schedule a pickup. No box or label is required at most drop-off locations.",
+      "source_url": "https://www.amazon.com/returns"
+    },
+    {
+      "id": "amz-ret-003",
+      "category": "Returns & Refunds",
+      "question": "What is Amazon's A-to-z Guarantee?",
+      "answer": "The A-to-z Guarantee protects you when you buy from third-party sellers on Amazon. If the item never arrived, was significantly different than described, or the seller won't refund, you can file an A-to-z claim within 90 days of the order.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GNW5BV6FAYZUM92E"
+    },
+    {
+      "id": "amz-ret-004",
+      "category": "Returns & Refunds",
+      "question": "How long do Amazon refunds take?",
+      "answer": "Refunds typically post within 3 to 5 business days after the return is received and processed. Refunds to Amazon gift card balance are usually instant once the return is approved.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G6STBZ8FQRQ8GUKB"
+    },
+    {
+      "id": "amz-prime-001",
+      "category": "Amazon Prime",
+      "question": "How much does Amazon Prime cost?",
+      "answer": "Amazon Prime is 14 dollars and 99 cents per month, or 139 dollars per year. Students qualify for a 50 percent discount. Prime Access (for EBT/Medicaid recipients) is 6 dollars and 99 cents per month.",
+      "source_url": "https://www.amazon.com/amazonprime"
+    },
+    {
+      "id": "amz-prime-002",
+      "category": "Amazon Prime",
+      "question": "What's included with Prime?",
+      "answer": "Prime includes free 2-day shipping (same-day or next-day in many areas), Prime Video streaming, Amazon Music Prime, Prime Reading, exclusive deals, and a 10 percent discount at Whole Foods Market.",
+      "source_url": "https://www.amazon.com/amazonprime"
+    },
+    {
+      "id": "amz-prime-003",
+      "category": "Amazon Prime",
+      "question": "Is there a Prime free trial?",
+      "answer": "Yes — new Prime members get a 30-day free trial. You'll be charged the membership fee on day 31 unless you cancel before then.",
+      "source_url": "https://www.amazon.com/amazonprime"
+    },
+    {
+      "id": "amz-ship-001",
+      "category": "Shipping & Delivery",
+      "question": "Does Amazon offer free shipping without Prime?",
+      "answer": "Yes — eligible orders of 35 dollars or more from Amazon ship free with standard delivery (typically 5 to 8 business days). Prime members get free shipping on most items with no minimum.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GNNVL66LPLEKFQHU"
+    },
+    {
+      "id": "amz-ship-002",
+      "category": "Shipping & Delivery",
+      "question": "What is Amazon Same-Day Delivery?",
+      "answer": "Prime members in eligible ZIP codes can get Same-Day Delivery on millions of items for free with a 25 dollar minimum order, or for a small fee on smaller orders. Look for the Same-Day badge at checkout.",
+      "source_url": "https://www.amazon.com/sameday"
+    },
+    {
+      "id": "amz-ship-003",
+      "category": "Shipping & Delivery",
+      "question": "Can I pick up Amazon orders instead of having them delivered?",
+      "answer": "Yes — you can pick up from an Amazon Hub Locker, Amazon Hub Counter, Whole Foods Market, or Amazon Fresh store. Pickup is often free and adds about a day to delivery time.",
+      "source_url": "https://www.amazon.com/hub"
+    },
+    {
+      "id": "amz-pm-001",
+      "category": "Price Match",
+      "question": "Does Amazon price match competitors?",
+      "answer": "Amazon does not generally price match other retailers' prices. Amazon prices change frequently based on supply and demand, so you may see prices drop after purchase — in that case, contacting customer service for a one-time post-purchase adjustment is possible but not guaranteed.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G15W9YJ7N5DV6Z9F"
+    },
+    {
+      "id": "amz-pay-001",
+      "category": "Payment Options",
+      "question": "What payment methods does Amazon accept?",
+      "answer": "Amazon accepts most major credit and debit cards (Visa, Mastercard, American Express, Discover), Amazon Gift Cards, Amazon Pay, EBT for eligible grocery items, and several Buy Now Pay Later options like Affirm.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GFTBHGCJBQLD4PV4"
+    },
+    {
+      "id": "amz-pay-002",
+      "category": "Payment Options",
+      "question": "Can I use EBT on Amazon?",
+      "answer": "Yes — Amazon accepts SNAP EBT for eligible grocery items in all 50 states. EBT cardholders also qualify for a discounted Prime Access membership at 6 dollars and 99 cents per month.",
+      "source_url": "https://www.amazon.com/snap-ebt"
+    },
+    {
+      "id": "amz-pay-003",
+      "category": "Payment Options",
+      "question": "Does Amazon offer installment payments?",
+      "answer": "Yes — Amazon offers monthly payment plans on select items through Affirm, and Equal Payments (interest-free) on certain electronics for Prime members with eligible Amazon credit cards.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GZLZSWGJ7DUW6XEH"
+    },
+    {
+      "id": "amz-sub-001",
+      "category": "Subscribe & Save",
+      "question": "What is Subscribe & Save?",
+      "answer": "Subscribe & Save lets you schedule recurring deliveries of eligible household items and save up to 15 percent when you subscribe to 5 or more items in a single delivery. You can skip or cancel anytime.",
+      "source_url": "https://www.amazon.com/subscribe"
+    },
+    {
+      "id": "amz-reg-001",
+      "category": "Registry & Wish List",
+      "question": "How do I create a baby or wedding registry on Amazon?",
+      "answer": "Go to amazon.com/baby or amazon.com/wedding, sign in, and click Create. You'll get a 15 percent completion discount, a free welcome box for Prime members, and a 1-year return window on most registry items.",
+      "source_url": "https://www.amazon.com/wedding"
+    },
+    {
+      "id": "amz-reg-002",
+      "category": "Registry & Wish List",
+      "question": "How long is the Amazon registry return window?",
+      "answer": "Items shipped to a baby or wedding registry can be returned within 365 days of receipt, which is significantly longer than the standard 30-day window.",
+      "source_url": "https://www.amazon.com/wedding"
+    },
+    {
+      "id": "amz-gc-001",
+      "category": "Gift Cards",
+      "question": "Do Amazon Gift Cards expire?",
+      "answer": "No — Amazon Gift Cards do not expire and have no fees. They can be used on most items sold on Amazon.com, but not for digital newspaper/magazine subscriptions or for buying other gift cards.",
+      "source_url": "https://www.amazon.com/gc"
+    },
+    {
+      "id": "amz-gc-002",
+      "category": "Gift Cards",
+      "question": "How do I check my Amazon Gift Card balance?",
+      "answer": "Sign in to amazon.com, go to Your Account, then Gift Card balance. You can also redeem new gift cards there using the claim code.",
+      "source_url": "https://www.amazon.com/gp/css/gc/balance"
+    },
+    {
+      "id": "amz-tax-001",
+      "category": "Taxes",
+      "question": "Does Amazon charge sales tax?",
+      "answer": "Yes — Amazon charges sales tax in all states that levy it. Tax rates depend on the shipping address. Some items (like groceries in many states) may be tax-exempt.",
+      "source_url": "https://www.amazon.com/tax"
+    },
+    {
+      "id": "amz-tax-002",
+      "category": "Taxes",
+      "question": "Can I set up a tax-exempt account on Amazon?",
+      "answer": "Yes — qualified non-profits, government agencies, and resellers can enroll in the Amazon Tax Exemption Program (ATEP). Apply at amazon.com/atep and upload your exemption certificate.",
+      "source_url": "https://www.amazon.com/atep"
+    },
+    {
+      "id": "amz-mkt-001",
+      "category": "Marketplace Sellers",
+      "question": "How do I know if I'm buying from Amazon or a third-party seller?",
+      "answer": "On the product page, check the Sold by line under the price. If it says Sold by Amazon.com it's Amazon directly; otherwise it's a third-party seller. Either way, A-to-z Guarantee protection applies for most purchases.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GBQTQHBV2VEKAQ5W"
+    },
+    {
+      "id": "amz-mkt-002",
+      "category": "Marketplace Sellers",
+      "question": "Are returns the same for third-party sellers?",
+      "answer": "Most third-party sellers honor Amazon's 30-day return policy, but some categories or international sellers may have different rules. Check the seller's return policy on the product page before purchasing.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7"
+    },
+    {
+      "id": "amz-sup-001",
+      "category": "Contact & Support",
+      "question": "How do I contact Amazon customer service?",
+      "answer": "Go to amazon.com/contact, sign in, and choose your order. You can chat, request a callback, or email. Phone support is available 24/7. There is no public direct number — Amazon prefers callbacks initiated from your account.",
+      "source_url": "https://www.amazon.com/contact"
+    },
+    {
+      "id": "amz-sup-002",
+      "category": "Contact & Support",
+      "question": "How do I cancel an Amazon order?",
+      "answer": "Go to Your Orders, find the order, and click Cancel items. If the order has already shipped, you'll need to refuse delivery or return it after it arrives. Digital orders generally cannot be cancelled once placed.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GTNAW5XVD9LFVB9N"
+    },
+    {
+      "id": "amz-sup-003",
+      "category": "Contact & Support",
+      "question": "How do I track an Amazon order?",
+      "answer": "Sign in and go to Your Orders. Click Track Package for live status. You'll also receive email and app notifications at each major step — shipped, out for delivery, and delivered.",
+      "source_url": "https://www.amazon.com/orders"
+    },
+    {
+      "id": "amz-sup-004",
+      "category": "Contact & Support",
+      "question": "What if my Amazon package was stolen or never arrived?",
+      "answer": "Wait 48 hours past the estimated delivery date, then check with neighbors and your building. If still missing, go to Your Orders and select Problem with order — Amazon usually replaces or refunds promptly under their A-to-z Guarantee.",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GNW5BV6FAYZUM92E"
+    },
+    {
+      "id": "amz-prot-001",
+      "category": "Protection Plans",
+      "question": "Does Amazon offer extended warranties or protection plans?",
+      "answer": "Yes — Amazon offers Asurion-backed protection plans on most electronics and appliances. You can add coverage at checkout or within 30 days of purchase. Plans cover accidents, mechanical failures, and power surges.",
+      "source_url": "https://www.amazon.com/asurion"
+    }
+  ]
+}
