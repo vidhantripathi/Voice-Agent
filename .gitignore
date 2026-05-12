@@ -29,3 +29,6 @@ realtime_agent/data/
 dist/
 build/
 *.tmp
+
+# Fly deploy script (contains live secrets — keep local)
+fly-deploy.sh

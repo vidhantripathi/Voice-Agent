@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+.DS_Store
+node_modules
+**/node_modules
+.env
+**/.env
+realtime_agent/data
+.claude
+.vscode
+.idea
+*.md
+fly-deploy.sh

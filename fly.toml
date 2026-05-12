@@ -1,0 +1,36 @@
+# Fly.io configuration for Reya Voice Agent
+# App name must be globally unique — change if "reya-voice-agent" is taken.
+
+app = "reya-voice-agent"
+primary_region = "iad"   # Ashburn (US East). Change to closest region for lowest latency.
+
+[build]
+
+# Non-sensitive runtime config. Secrets are set via `flyctl secrets set`.
+[env]
+  PORT = "3000"
+  REALTIME_MODEL = "gpt-4o-realtime-preview-2024-12-17"
+  REALTIME_VOICE = "alloy"
+  RETRIEVAL_MODEL = "gpt-4o-mini"
+  TURN_THRESHOLD = "0.5"
+  TURN_PREFIX_PADDING_MS = "200"
+  TURN_SILENCE_MS = "400"
+  TEMPERATURE = "0.7"
+  MAX_RESPONSE_TOKENS = "200"
+  BASIC_AUTH_USER = "admin"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0   # cold start ~1-2s, free tier friendly. Set to 1 for always-on.
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
+
+# Tickets + transcripts persist across deploys on this volume
+[mounts]
+  source = "data"
+  destination = "/app/data"
