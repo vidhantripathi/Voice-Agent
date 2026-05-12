@@ -638,6 +638,65 @@ curl -X PATCH <span class="n" data-base>$BASE_URL</span>/tickets/RC-001 \
       </tbody>
     </table>
 
+    <h3>🔌 Customer database integration</h3>
+    <p>The agent calls a <code>lookup_customer_data</code> tool whenever the customer asks about their own order, refund, or account. The server proxies that call to your own backend via the <code>CUSTOMER_DATA_WEBHOOK</code> environment variable.</p>
+    <p><b>This is the plug-and-play extension point.</b> Point it at your DB API and the agent immediately knows about every order in your system.</p>
+
+    <table class="endpoint-tbl">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-post">POST</td><td class="path">/customer/query</td><td>Proxies to <code>CUSTOMER_DATA_WEBHOOK</code>. Body: <code>{ query_type, retailer, customer_id, order_id? }</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Your webhook receives</h4>
+    <div class="code-wrap">
+      <span class="lang">json</span>
+      <pre>{
+  <span class="n">"query_type"</span>:   <span class="s">"order_status"</span>,    <span class="c">// or order_history, refund_status, shipping_status, account_info</span>
+  <span class="n">"retailer"</span>:     <span class="s">"amazon"</span>,
+  <span class="n">"customer_id"</span>:  <span class="s">"customer@email.com"</span>,
+  <span class="n">"order_id"</span>:     <span class="s">"112-8847431-1922"</span>
+}</pre>
+    </div>
+
+    <h4>Your webhook returns (your schema, anything JSON)</h4>
+    <div class="code-wrap">
+      <span class="lang">json</span>
+      <pre>{
+  <span class="n">"order_id"</span>:         <span class="s">"112-8847431-1922"</span>,
+  <span class="n">"status"</span>:           <span class="s">"in_transit"</span>,
+  <span class="n">"carrier"</span>:          <span class="s">"UPS"</span>,
+  <span class="n">"estimated_arrival"</span>: <span class="s">"2026-05-15"</span>,
+  <span class="n">"items"</span>:            [{ <span class="n">"sku"</span>: <span class="s">"B07XJ8C8F5"</span>, <span class="n">"qty"</span>: 1 }]
+}</pre>
+    </div>
+    <p>Reya speaks the data back to the customer in plain English, applies the same guardrails (no PII leakage, no fabrication), and files a ticket if anything goes wrong.</p>
+
+    <h3>🛡️ Guardrails</h3>
+    <p>Built into the system prompt and enforced on every turn — non-negotiable, override every other instruction:</p>
+    <ul>
+      <li><b>No PII collection</b> — never asks for credit card, SSN, password, bank account, full DOB. Refuses if volunteered.</li>
+      <li><b>No policy hallucination</b> — only states facts from the FAQ knowledge base or the cross-retailer reference. Three-tier confidence framework (FAQ → confident inference with hedge → honest "I don't know").</li>
+      <li><b>No binding commitments</b> — cannot promise refunds, approve returns, or override policy. Only files structured tickets.</li>
+      <li><b>Out-of-scope refusal</b> — declines medical, legal, financial advice and any topic outside customer support.</li>
+      <li><b>Prompt-injection resistance</b> — recognizes "ignore previous instructions" and similar attacks; stays in support role.</li>
+      <li><b>Data minimization</b> — only collects what's needed (name for tickets, order ID for lookups). Doesn't repeat back sensitive details.</li>
+    </ul>
+
+    <h3>🇪🇺 GDPR-aligned privacy controls</h3>
+    <p>Built-in features for European data protection compliance:</p>
+    <table class="endpoint-tbl">
+      <thead><tr><th>Right</th><th>How</th></tr></thead>
+      <tbody>
+        <tr><td class="method m-get" style="color:var(--accent)">ACCESS</td><td>Full transcript and ticket history per session via <code>GET /tickets/:id</code> and <code>GET /transcripts/:sessionId</code>.</td></tr>
+        <tr><td class="method m-patch" style="color:#d97706">ERASURE</td><td>One-call deletion of all session data: <code>DELETE /sessions/:sessionId</code> removes the transcript + any linked tickets.</td></tr>
+        <tr><td class="method m-get" style="color:var(--accent)">AUDIT</td><td>Every status change, agent reply, and AI action is logged on the ticket with timestamp + actor.</td></tr>
+        <tr><td class="method m-post" style="color:var(--accent)">RETENTION</td><td>Auto-purge of stale data via <code>DATA_RETENTION_DAYS</code> env var (default 90). Runs daily.</td></tr>
+        <tr><td class="method m-get" style="color:var(--accent)">DISCLOSURE</td><td>Reya opens every call with: "This is Reya, an AI support assistant. This call may be recorded for service improvement and AI training."</td></tr>
+      </tbody>
+    </table>
+
     <h3>Embed the voice widget <span class="pill-soon">beta</span></h3>
     <p>Drop the iframe on any page you own. Audio streams directly between the browser and OpenAI — your server only handles session minting and ticket creation.</p>
     <div class="code-wrap">
@@ -821,6 +880,22 @@ async function onEvent(e) {
         output = `[FAQ CONTEXT - ${retailer.toUpperCase()} - answer the customer using this]:\n${answer}`;
       } catch (err) {
         output = `[FAQ CONTEXT - ${retailer.toUpperCase()} - retrieval failed: ${err.message}]`;
+      }
+    } else if (name === "lookup_customer_data") {
+      try {
+        const r = await fetch("/customer/query", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(args),
+        });
+        const data = await r.json();
+        if (data.configured === false) {
+          output = `feature_not_configured: ${data.message}`;
+        } else {
+          output = `[CUSTOMER DATA - ${(args.query_type || "").toUpperCase()}]:\n${JSON.stringify(data, null, 2)}`;
+        }
+      } catch (err) {
+        output = `Customer data lookup failed: ${err.message}. Tell the customer you can't access their account details right now.`;
       }
     } else if (name === "create_support_ticket" || name === "escalate_to_human") {
       const isEscalation = name === "escalate_to_human";
