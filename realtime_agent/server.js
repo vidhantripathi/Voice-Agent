@@ -532,6 +532,7 @@ const FAQ_TOOL = {
 };
 
 const app = express();
+app.set("trust proxy", true);   // respect X-Forwarded-Proto from Render/Fly/etc
 app.use(express.json());
 
 // Auth middleware — accepts EITHER Basic (browser) OR Bearer (programmatic)
